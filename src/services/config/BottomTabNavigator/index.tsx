@@ -1,59 +1,55 @@
 import React, {useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
+import {Image, Platform, StyleSheet} from 'react-native';
 import Landing from '../../../screens/Landing';
+import Home from '../../../screens/Home';
 import LandingNext from '../../../screens/LandingNext';
 import images from '../../utilities/images';
-import {Image, Platform, StyleSheet} from 'react-native';
 import {colors, fontSize, sizes} from '../../utilities';
+import DashLights from '../../../screens/DashLights';
+import Feedback from '../../../screens/Feedback';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator: React.FC = () => {
-  const [bt1, setBt1] = useState<any>(images.bt1);
-  const [bt2, setBt2] = useState<any>(images.bt2);
-  const [bt3, setBt3] = useState<any>(images.bt3);
-  const [bt4, setBt4] = useState<any>(images.bt4);
-  const [bt1f, setBt1f] = useState<any>(images.bt1f);
-  const [bt2f, setBt2f] = useState<any>(images.bt2f);
-  const [bt3f, setBt3f] = useState<any>(images.bt3f);
-  const [bt4f, setBt4f] = useState<any>(images.bt4f);
+  const [iconSets] = useState({
+    Scan: {focused: images.bt1f, unfocused: images.bt1},
+    Workshops: {focused: images.bt2f, unfocused: images.bt2},
+    DashLights: {focused: images.bt3f, unfocused: images.bt3},
+    Feedback: {focused: images.bt4f, unfocused: images.bt4},
+  });
 
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size}) => {
-          let iconName: string;
-
-          if (route.name === 'Landing') {
-            iconName = focused ? 'qr-code' : 'qr-code-outline';
-          } else if (route.name === 'LandingNext') {
-            iconName = focused ? 'construct' : 'construct-outline';
-          } else {
-            iconName = 'ellipse';
-          }
-
-          // Render icon
-          return <Image source={images.bg} style={styles.icon} />;
+        tabBarIcon: ({focused}) => {
+          const icon = focused
+            ? iconSets[route.name as keyof typeof iconSets].focused
+            : iconSets[route.name as keyof typeof iconSets].unfocused;
+          return <Image source={icon} style={styles.icon} />;
         },
         headerShown: false,
         tabBarStyle: {
-          borderBlockColor: '#444444',
+          borderColor: '#444444',
           backgroundColor: '#444444',
           width: sizes.screenWidth,
           height: sizes.screenHeight * 0.08,
           paddingBottom:
-            Platform.OS == 'android'
+            Platform.OS === 'android'
               ? sizes.screenHeight * 0.015
               : sizes.screenHeight * 0.025,
         },
-
+        tabBarLabelStyle: {
+          fontFamily: 'Medium',
+          fontSize: fontSize.small,
+          fontWeight: '400',
+        },
         tabBarActiveTintColor: colors.appOrange,
         tabBarInactiveTintColor: '#A8A8A8',
       })}>
       <Tab.Screen
         name="Scan"
-        component={Landing}
+        component={Home}
         options={{tabBarLabel: 'Scan'}}
       />
       <Tab.Screen
@@ -62,13 +58,13 @@ const BottomTabNavigator: React.FC = () => {
         options={{tabBarLabel: 'Workshops'}}
       />
       <Tab.Screen
-        name="Dash Lights"
-        component={Landing}
+        name="DashLights"
+        component={DashLights}
         options={{tabBarLabel: 'Dash Lights'}}
       />
       <Tab.Screen
         name="Feedback"
-        component={LandingNext}
+        component={Feedback}
         options={{tabBarLabel: 'Feedback'}}
       />
     </Tab.Navigator>
@@ -77,10 +73,9 @@ const BottomTabNavigator: React.FC = () => {
 
 const styles = StyleSheet.create({
   icon: {
-    height: 16,
-    width: 16,
+    height: 19,
+    width: 19,
   },
-
   headerTitle: {
     fontFamily: 'SemiBold',
     fontSize: fontSize.extraLarge,

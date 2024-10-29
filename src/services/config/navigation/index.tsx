@@ -12,6 +12,8 @@ import AddVehicle from '../../../screens/AddVehicle';
 import Garage from '../../../screens/Garage';
 import EditVehicle from '../../../screens/EditVehicle';
 import BottomTabNavigator from '../BottomTabNavigator';
+import Scann from '../../../screens/Scann';
+import Review from '../../../screens/Review';
 
 export type VehicleDataType = {
   make: string;
@@ -33,6 +35,8 @@ export type RootStackParamList = {
   Garage: any;
   EditVehicle: {vehicleData: VehicleDataType};
   BottomTabNavigator: any;
+  Scann: any;
+  Review: any;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -57,6 +61,8 @@ const MainNavigator: React.FC = (): JSX.Element => {
         <Stack.Screen name="AddVehicle" component={AddVehicle} />
         <Stack.Screen name="Garage" component={Garage} />
         <Stack.Screen name="EditVehicle" component={EditVehicle} />
+        <Stack.Screen name="Scann" component={Scann} />
+        <Stack.Screen name="Review" component={Review} />
       </Stack.Navigator>
     </NavigationContainer>
   );

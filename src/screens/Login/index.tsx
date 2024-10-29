@@ -30,7 +30,7 @@ const Login: React.FC = (): JSX.Element => {
   };
 
   const handleLogin = () => {
-    console.log('hey', email, password);
+    navigation.navigate('BottomTabNavigator');
   };
 
   return (

@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Medium',
     fontSize: fontSize.large,
     color: colors.white,
+    bottom: 2,
   },
 });
 

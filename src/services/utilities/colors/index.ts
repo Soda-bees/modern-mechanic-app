@@ -53,4 +53,6 @@ export const colors: {[key: string]: string} = {
   appOrange: '#F96D37',
   grey: '#3A3A3A',
   lightGrey: '#C0C0C0',
+  bodyGrey: '#383838',
+  dashGrey: '#3E3E3E',
 };

@@ -24,6 +24,19 @@ import bt1f from '../../../assets/bt1f.png';
 import bt2f from '../../../assets/bt2f.png';
 import bt3f from '../../../assets/bt3f.png';
 import bt4f from '../../../assets/bt4f.png';
+import userIcon from '../../../assets/userIcon.png';
+import settingsIcon from '../../../assets/settingsIcon.png';
+import waveIcon from '../../../assets/waveIcon.png';
+import scanIcon from '../../../assets/scanIcon.png';
+import bottomMeter from '../../../assets/bottomMeter.png';
+import absLight from '../../../assets/absLight.png';
+import engineLight from '../../../assets/engineLight.png';
+import batteryLight from '../../../assets/batteryLight.png';
+import lowFuelLight from '../../../assets/lowFuelLight.png';
+import seatBeltLight from '../../../assets/seatBeltLight.png';
+import tractionLight from '../../../assets/tractionLight.png';
+import oilPressureLight from '../../../assets/oilPressureLight.png';
+import temperatureLight from '../../../assets/temperatureLight.png';
 
 const images: {[key: string]: any} = {
   landingBg,
@@ -52,6 +65,19 @@ const images: {[key: string]: any} = {
   bt3f,
   bt4,
   bt4f,
+  userIcon,
+  settingsIcon,
+  waveIcon,
+  scanIcon,
+  bottomMeter,
+  absLight,
+  engineLight,
+  batteryLight,
+  lowFuelLight,
+  tractionLight,
+  oilPressureLight,
+  seatBeltLight,
+  temperatureLight,
 };
 
 export default images;
