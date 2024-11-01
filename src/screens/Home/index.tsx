@@ -7,7 +7,10 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserHeader from '../../components/UserHeader';
 
-type NavigationProp = StackNavigationProp<RootStackParamList, 'Scann'>;
+type NavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Scann' | 'ScanHistory'
+>;
 
 const Home: React.FC = (): JSX.Element => {
   const navigation = useNavigation<NavigationProp>();
@@ -24,7 +27,9 @@ const Home: React.FC = (): JSX.Element => {
     console.log('working');
   };
 
-  const handleScanHistory = () => {};
+  const handleScanHistory = () => {
+    navigation.navigate('ScanHistory');
+  };
 
   return (
     <SafeAreaView>

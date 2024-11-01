@@ -14,6 +14,10 @@ import EditVehicle from '../../../screens/EditVehicle';
 import BottomTabNavigator from '../BottomTabNavigator';
 import Scann from '../../../screens/Scann';
 import Review from '../../../screens/Review';
+import WorkshopDetails from '../../../screens/WorkshopDetails';
+import ScanResult from '../../../screens/ScanResult';
+import ScanHistory from '../../../screens/ScanHistory';
+import DetailedHistory from '../../../screens/DetailedHistory';
 
 export type VehicleDataType = {
   make: string;
@@ -37,6 +41,10 @@ export type RootStackParamList = {
   BottomTabNavigator: any;
   Scann: any;
   Review: any;
+  WorkshopDetails: any;
+  ScanResult: any;
+  ScanHistory: any;
+  DetailedHistory: any;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -63,6 +71,10 @@ const MainNavigator: React.FC = (): JSX.Element => {
         <Stack.Screen name="EditVehicle" component={EditVehicle} />
         <Stack.Screen name="Scann" component={Scann} />
         <Stack.Screen name="Review" component={Review} />
+        <Stack.Screen name="WorkshopDetails" component={WorkshopDetails} />
+        <Stack.Screen name="ScanResult" component={ScanResult} />
+        <Stack.Screen name="ScanHistory" component={ScanHistory} />
+        <Stack.Screen name="DetailedHistory" component={DetailedHistory} />
       </Stack.Navigator>
     </NavigationContainer>
   );

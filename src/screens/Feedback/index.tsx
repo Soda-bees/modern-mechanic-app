@@ -98,7 +98,7 @@ const Feedback: React.FC = (): JSX.Element => {
                 <View style={styles.flexWrapper}>
                   {feedbacks.map((item, index) => {
                     return (
-                      <View style={styles.lightContainer}>
+                      <View style={styles.lightContainer} key={index}>
                         <View style={styles.totalRatingsRow}>
                           <Text style={styles.name}>{item.name}</Text>
                           <StarRatingDisplay

@@ -15,7 +15,7 @@ const UserHeader: React.FC = (): JSX.Element => {
     <View style={styles.header}>
       <Text style={styles.headerTitle}>
         Modern
-        <Text style={styles.headerTitleOrange}>Mechanic</Text>
+        <Text style={styles.headerTitleOrange}> Mechanic</Text>
       </Text>
 
       <View style={styles.headerRightSection}>

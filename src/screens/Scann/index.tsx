@@ -20,7 +20,7 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserHeader from '../../components/UserHeader';
 
-type NavigationProp = StackNavigationProp<RootStackParamList, 'Garage'>;
+type NavigationProp = StackNavigationProp<RootStackParamList, 'ScanResult'>;
 
 const Scann: React.FC = (): JSX.Element => {
   const navigation = useNavigation<NavigationProp>();
@@ -36,7 +36,9 @@ const Scann: React.FC = (): JSX.Element => {
 
   const handleConnect = () => {};
 
-  const handleScan = () => {};
+  const handleScan = () => {
+    navigation.navigate('ScanResult');
+  };
 
   console.log(index);
 
@@ -47,6 +49,13 @@ const Scann: React.FC = (): JSX.Element => {
         <View>
           <View style={styles.screen}>
             <View style={styles.header}>
+              <TouchableOpacity
+                style={styles.backIconContainer}
+                onPress={() => {
+                  navigation.goBack();
+                }}>
+                <Image source={images.backIcon} style={styles.backIcon} />
+              </TouchableOpacity>
               <Text style={styles.headerTitle}>
                 Modern
                 <Text style={styles.headerTitleOrange}> Mechanic</Text>

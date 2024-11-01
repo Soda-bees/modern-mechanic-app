@@ -37,7 +37,7 @@ const ResetPassword: React.FC = (): JSX.Element => {
 
   return (
     <SafeAreaView>
-      <View>
+      <View style={styles.main}>
         <Image source={images.bg} style={styles.bg} />
         <Header goBack={false} title="Reset Password" />
 
@@ -47,7 +47,7 @@ const ResetPassword: React.FC = (): JSX.Element => {
           </Text>
 
           <Text
-            style={[styles.inputLabel, {marginTop: sizes.screenHeight * 0.03}]}>
+            style={[styles.inputLabel, {marginTop: sizes.screenHeight * 0.05}]}>
             Password
           </Text>
           <View style={styles.inputContainer}>

@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  TextInput,
 } from 'react-native';
 import styles from './style';
 import images from '../../services/utilities/images';
@@ -14,8 +15,9 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserHeader from '../../components/UserHeader';
 import Modal from 'react-native-modal';
-import {StarRatingDisplay} from 'react-native-star-rating-widget';
-import {colors} from '../../services/utilities';
+import StarRating, {StarRatingDisplay} from 'react-native-star-rating-widget';
+import {colors, sizes} from '../../services/utilities';
+import OrangeButton from '../../components/OrangeButton';
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Scann'>;
 
 const Review: React.FC = (): JSX.Element => {
@@ -23,6 +25,8 @@ const Review: React.FC = (): JSX.Element => {
 
   const [email, setEmail] = useState<string>('');
   const [errMsg, setErrMsg] = useState<string>('');
+  const [rating, setRating] = useState<number>(0);
+  const [comment, setComment] = useState<string>('');
 
   type DashLight = {
     name: string;
@@ -51,101 +55,70 @@ const Review: React.FC = (): JSX.Element => {
     },
   ]);
 
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [modalData, setModalData] = useState<any>();
-
-  const handleModal = () => {};
+  const handleSubmit = () => {};
 
   return (
     <SafeAreaView>
       <View>
         <Image source={images.bg} style={styles.bg} />
-        <View>
-          <View style={styles.screen}>
-            <View style={styles.header}>
-              <Text style={styles.headerTitle}>
-                Modern
-                <Text style={styles.headerTitleOrange}> Mechanic</Text>
-              </Text>
+        <View style={styles.screen}>
+          <View style={styles.header}>
+            <Text style={styles.headerTitle}>
+              Modern
+              <Text style={styles.headerTitleOrange}> Mechanic</Text>
+            </Text>
+          </View>
+          <View style={styles.lowerBody}>
+            <View style={styles.row}>
+              <TouchableOpacity
+                style={styles.backIconContainer}
+                onPress={() => {
+                  navigation.goBack();
+                }}>
+                <Image source={images.backIcon} style={styles.backIcon} />
+              </TouchableOpacity>
+              <Text style={styles.title}>Feedback</Text>
             </View>
-            <View style={styles.lowerBody}>
-              <View style={styles.row}>
-                <TouchableOpacity style={styles.backIconContainer}>
-                  <Image source={images.backIcon} style={styles.backIcon} />
-                </TouchableOpacity>
-                <Text style={styles.title}>Feedback</Text>
-              </View>
 
-              <Text style={styles.disabledText}>
-                Tell us about your experience of using OBD Reader App
-              </Text>
+            <Text style={styles.disabledText}>
+              Tell us about your experience of using OBD Reader App
+            </Text>
 
-              <View style={styles.orangeContainer}>
-                <Text style={styles.textWhite}>Total Reviews</Text>
-                <View style={styles.totalRatingsRow}>
-                  <View style={styles.row}>
-                    <Text style={styles.textWhite2}>4.5</Text>
-                    <View style={styles.ratingContainer}>
-                      <StarRatingDisplay
-                        rating={5}
-                        color="#FFC200"
-                        emptyColor={colors.lightGrey}
-                        maxStars={5}
-                        starSize={26}
-                        starStyle={{marginHorizontal: 0}}
-                      />
-                    </View>
-                  </View>
-                  <TouchableOpacity style={styles.writeAReviewBtn}>
-                    <Text style={styles.orangeText}>Write a review</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
+            <View style={styles.textArea}>
+              <TextInput
+                multiline={true}
+                placeholder="Notes + better info for more acurate results"
+                placeholderTextColor={colors.disabledText}
+                style={styles.textAreaInput}
+                onChangeText={text => {
+                  setComment(text);
+                }}
+                value={comment}
+              />
+            </View>
 
-              <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={styles.flexWrapper}>
-                  {feedbacks.map((item, index) => {
-                    return (
-                      <View style={styles.lightContainer}>
-                        <View style={styles.totalRatingsRow}>
-                          <Text style={styles.name}>{item.name}</Text>
-                          <StarRatingDisplay
-                            rating={item.rating}
-                            color="#FFC200"
-                            emptyColor={colors.lightGrey}
-                            maxStars={5}
-                            starSize={26}
-                            starStyle={{marginHorizontal: 0}}
-                          />
-                        </View>
-                        <Text style={styles.comment}>{item.comment}</Text>
-                      </View>
-                    );
-                  })}
-                </View>
-              </ScrollView>
+            <Text style={styles.disabledText}>Give your rating</Text>
+
+            <StarRating
+              rating={rating}
+              color="#FFC200"
+              emptyColor={colors.lightGrey}
+              maxStars={5}
+              starSize={36}
+              starStyle={{
+                marginLeft: 0,
+                marginRight: sizes.screenWidth * 0.02,
+              }}
+              onChange={rating => setRating(rating)}
+              enableHalfStar={false}
+              style={{marginTop: sizes.screenHeight * 0.01}}
+            />
+            <View style={styles.bottomBtnContainer}>
+              <OrangeButton title="Submit" onPress={handleSubmit} />
             </View>
           </View>
         </View>
       </View>
-
-      <Modal
-        isVisible={showModal}
-        backdropOpacity={0.4}
-        onBackButtonPress={() => {
-          setShowModal(false);
-        }}
-        onBackdropPress={() => {
-          setShowModal(false);
-        }}>
-        <View style={styles.modalBody}>
-          <View style={styles.modalIconContainer}>
-            <Image style={styles.modalIcon} source={modalData?.icon} />
-          </View>
-          <Text style={styles.modalTextWhite}>{modalData?.name}</Text>
-          <Text style={styles.modalTextDisabled}>{modalData?.info}</Text>
-        </View>
-      </Modal>
     </SafeAreaView>
   );
 };

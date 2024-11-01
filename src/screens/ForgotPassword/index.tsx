@@ -27,7 +27,7 @@ const ForgotPassword: React.FC = (): JSX.Element => {
 
   return (
     <SafeAreaView>
-      <View>
+      <View style={styles.main}>
         <Image source={images.bg} style={styles.bg} />
         <Header goBack={true} title="Forgot Password" />
 
@@ -55,8 +55,9 @@ const ForgotPassword: React.FC = (): JSX.Element => {
           </View>
 
           <Text style={styles.errMsg}>{errMsg}</Text>
-
-          <OrangeButton title="Send" onPress={handleSend} />
+          <View style={styles.orangeButtonContainer}>
+            <OrangeButton title="Send" onPress={handleSend} />
+          </View>
         </View>
       </View>
     </SafeAreaView>

@@ -37,6 +37,24 @@ import seatBeltLight from '../../../assets/seatBeltLight.png';
 import tractionLight from '../../../assets/tractionLight.png';
 import oilPressureLight from '../../../assets/oilPressureLight.png';
 import temperatureLight from '../../../assets/temperatureLight.png';
+import workShopImg from '../../../assets/workShopImg.png';
+import downloadIcon from '../../../assets/downloadIcon.png';
+import urgencyG from '../../../assets/urgencyG.png';
+import urgencyO from '../../../assets/urgencyO.png';
+import urgencyR from '../../../assets/urgencyR.png';
+import urgencyY from '../../../assets/urgencyY.png';
+import difficultyB from '../../../assets/difficultyB.png';
+import difficultyG from '../../../assets/difficultyG.png';
+import difficultyO from '../../../assets/difficultyO.png';
+import difficultyR from '../../../assets/difficultyR.png';
+import difficultyY from '../../../assets/difficultyY.png';
+import youtubeImg from '../../../assets/youtubeImg.png';
+import brakePads from '../../../assets/brakePads.png';
+import filter from '../../../assets/filter.png';
+import socket from '../../../assets/socket.png';
+import obd from '../../../assets/obd.png';
+import searchIcon from '../../../assets/searchIcon.png';
+import rightArrow from '../../../assets/rightArrow.png';
 
 const images: {[key: string]: any} = {
   landingBg,
@@ -78,6 +96,24 @@ const images: {[key: string]: any} = {
   oilPressureLight,
   seatBeltLight,
   temperatureLight,
+  workShopImg,
+  downloadIcon,
+  urgencyG,
+  urgencyO,
+  urgencyR,
+  urgencyY,
+  difficultyB,
+  difficultyG,
+  difficultyO,
+  difficultyR,
+  difficultyY,
+  youtubeImg,
+  brakePads,
+  filter,
+  socket,
+  obd,
+  searchIcon,
+  rightArrow,
 };
 
 export default images;

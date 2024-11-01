@@ -47,7 +47,7 @@ const Otp: React.FC = (): JSX.Element => {
 
   return (
     <SafeAreaView>
-      <View>
+      <View style={styles.main}>
         <Image source={images.bg} style={styles.bg} />
         <Header goBack={false} title="Email Verification" />
 
@@ -79,8 +79,9 @@ const Otp: React.FC = (): JSX.Element => {
             />
           </View>
           <Text style={styles.errMsg}>{errMsg}</Text>
-
-          <OrangeButton title="Verify" onPress={handleVerify} />
+          <View style={styles.orangeButtonContainer}>
+            <OrangeButton title="Verify" onPress={handleVerify} />
+          </View>
         </View>
       </View>
     </SafeAreaView>

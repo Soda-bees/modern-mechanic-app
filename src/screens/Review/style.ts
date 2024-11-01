@@ -13,6 +13,11 @@ const styles = StyleSheet.create({
     width: sizes.screenWidth,
   },
 
+  body: {
+    height: sizes.screenHeight * 0.84,
+    width: sizes.screenWidth,
+  },
+
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -36,18 +41,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
 
-  textWhite: {
-    fontFamily: 'Medium',
-    fontSize: fontSize.smallM,
-    color: colors.white,
-  },
-
-  textWhite2: {
-    fontFamily: 'Medium',
-    fontSize: fontSize.h6,
-    color: colors.white,
-  },
-
   lowerBody: {
     flex: 1,
     backgroundColor: colors.bodyGrey,
@@ -65,92 +58,15 @@ const styles = StyleSheet.create({
     marginBottom: sizes.screenHeight * 0.02,
   },
 
-  name: {
-    fontFamily: 'SemiBold',
-    fontSize: fontSize.large,
-    color: colors.white,
-    fontWeight: '500',
-  },
-
-  flexWrapper: {
-    maxWidth: sizes.screenWidth * 0.9,
-    marginBottom: sizes.screenHeight * 0.1,
-    marginTop: sizes.screenHeight * 0.03,
-  },
-
-  lightContainer: {
-    backgroundColor: colors.dashGrey,
-    borderRadius: 16,
-    paddingVertical: sizes.screenHeight * 0.02,
-    width: sizes.screenWidth * 0.9,
-    overflow: 'hidden',
-    marginBottom: sizes.screenHeight * 0.02,
-    paddingHorizontal: sizes.screenWidth * 0.04,
-  },
-
-  lightIcon: {
-    height: 56,
-    width: 56,
-    marginBottom: sizes.screenHeight * 0.03,
-    marginTop: sizes.screenHeight * 0.01,
-  },
-
-  modalBody: {
-    backgroundColor: colors.bodyGrey,
-    borderRadius: 26,
-    paddingVertical: sizes.screenHeight * 0.04,
-    paddingHorizontal: sizes.screenWidth * 0.05,
-    width: sizes.screenWidth * 0.84,
-    alignItems: 'center',
-    alignSelf: 'center',
-  },
-
-  modalIconContainer: {
-    backgroundColor: colors.dashGrey,
-    paddingVertical: sizes.screenHeight * 0.025,
-    paddingHorizontal: sizes.screenWidth * 0.06,
-    borderRadius: 16,
-  },
-
-  modalIcon: {
-    height: sizes.screenWidth * 0.2,
-    width: sizes.screenWidth * 0.2,
-  },
-
-  modalTextWhite: {
-    fontFamily: 'SemiBold',
-    fontSize: fontSize.medium,
-    color: colors.white,
-    fontWeight: '500',
-    marginVertical: sizes.screenHeight * 0.01,
-  },
-
-  modalTextDisabled: {
-    fontFamily: 'Regular',
-    fontSize: fontSize.regular,
-    color: colors.disabledText,
-    textAlign: 'center',
-  },
-
-  orangeContainer: {
-    width: sizes.screenWidth * 0.9,
-    paddingHorizontal: sizes.screenWidth * 0.04,
-    backgroundColor: colors.appOrange,
-    paddingVertical: sizes.screenHeight * 0.02,
-    borderRadius: 16,
-  },
-
-  totalRatingsRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: 5,
-  },
-
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: sizes.screenHeight * 0.03,
+  },
+
+  backIconContainer: {
+    bottom: 5,
+    marginRight: sizes.screenWidth * 0.02,
   },
 
   backIcon: {
@@ -159,31 +75,10 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
 
-  backIconContainer: {
-    bottom: 5,
-    marginRight: sizes.screenWidth * 0.02,
-  },
-
   disabledText: {
     fontFamily: 'Regular',
     fontSize: fontSize.smallM,
     color: colors.disabledText,
-  },
-
-  ratingContainer: {},
-
-  writeAReviewBtn: {
-    backgroundColor: colors.white,
-    paddingVertical: 2,
-    paddingHorizontal: sizes.screenWidth * 0.02,
-    borderRadius: 4,
-  },
-
-  orangeText: {
-    fontFamily: 'Medium',
-    fontSize: fontSize.regular,
-    color: colors.appOrange,
-    bottom: 2,
   },
 
   comment: {
@@ -191,6 +86,28 @@ const styles = StyleSheet.create({
     fontSize: fontSize.smallM,
     color: colors.white,
     marginTop: 5,
+  },
+
+  textArea: {
+    height: sizes.screenHeight * 0.18,
+    width: sizes.screenWidth * 0.9,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: colors.disabledBg,
+    paddingHorizontal: sizes.screenWidth * 0.02,
+    marginVertical: sizes.screenHeight * 0.02,
+  },
+
+  textAreaInput: {
+    fontFamily: 'Medium',
+    fontSize: fontSize.regular,
+    color: colors.disabledText,
+  },
+
+  bottomBtnContainer: {
+    position: 'absolute',
+    bottom: sizes.screenHeight * 0.05,
+    alignSelf: 'center',
   },
 });
 

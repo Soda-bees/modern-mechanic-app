@@ -13,9 +13,15 @@ const styles = StyleSheet.create({
     width: sizes.screenWidth,
   },
 
+  body: {
+    height: sizes.screenHeight * 0.84,
+    width: sizes.screenWidth,
+  },
+
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+    // justifyContent: 'space-between',
     width: sizes.screenWidth * 0.9,
     alignSelf: 'center',
     marginVertical: sizes.screenHeight * 0.03,
@@ -35,9 +41,15 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
 
-  body: {
-    height: sizes.screenHeight * 0.84,
-    width: sizes.screenWidth,
+  backIconContainer: {
+    top: 3,
+    marginRight: sizes.screenWidth * 0.02,
+  },
+
+  backIcon: {
+    height: 30,
+    width: 30,
+    resizeMode: 'contain',
   },
 
   hrFull: {
@@ -157,30 +169,37 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 26,
     paddingTop: sizes.screenHeight * 0.02,
     paddingHorizontal: sizes.screenWidth * 0.05,
-    justifyContent: 'space-between',
-  },
-
-  backRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: sizes.screenHeight * 0.03,
-  },
-
-  backIconContainer: {
-    top: 3,
-    marginRight: sizes.screenWidth * 0.02,
-  },
-
-  backIcon: {
-    height: 30,
-    width: 30,
   },
 
   title: {
     fontFamily: 'SemiBold',
-    fontSize: fontSize.extraLarge,
+    fontSize: fontSize.large,
     color: colors.white,
     fontWeight: '500',
+  },
+
+  searchContainer: {
+    borderColor: colors.disabledText,
+    borderWidth: 1,
+    borderRadius: sizes.screenHeight * 0.1,
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: sizes.screenWidth * 0.03,
+    marginVertical: sizes.screenHeight * 0.02,
+  },
+
+  searchIcon: {
+    height: 20,
+    width: 20,
+    resizeMode: 'contain',
+  },
+
+  input: {
+    fontFamily: 'Medium',
+    fontSize: fontSize.medium,
+    color: colors.disabledText,
+    width: sizes.screenWidth * 0.68,
+    marginLeft: 4,
   },
 
   orangeBtn: {
@@ -208,78 +227,74 @@ const styles = StyleSheet.create({
     bottom: 4,
   },
 
-  textWhiteSmall: {
-    fontFamily: 'Medium',
-    fontSize: fontSize.regular,
-    color: colors.white,
-    marginBottom: sizes.screenHeight * 0.03,
-  },
-
-  gifContainer: {
-    height: sizes.screenHeight * 0.18,
-    width: sizes.screenWidth * 0.9,
-    backgroundColor: colors.disabledBg,
-    borderRadius: 20,
-  },
-
-  bottomRow: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'space-between',
-    marginBottom: sizes.screenHeight * 0.02,
-  },
-
-  bottomRow2: {
-    marginBottom: sizes.screenHeight * 0.05,
-  },
-
-  bottomMeter: {
-    height: sizes.screenHeight * 0.12,
-    width: sizes.screenWidth * 0.38,
-    resizeMode: 'contain',
-  },
-
-  nextButton: {
+  row2: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.disabledBg,
-    marginTop: sizes.screenHeight * 0.02,
-    alignSelf: 'flex-end',
-    height: sizes.screenHeight * 0.055,
-    width: sizes.screenWidth * 0.3,
-    borderRadius: 100,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     marginBottom: sizes.screenHeight * 0.02,
+    backgroundColor: '#444444',
+    padding: 8,
+    borderRadius: 16,
   },
 
-  textWhite2: {
-    fontFamily: 'SemiBold',
-    fontSize: fontSize.regular,
+  historyCarImg: {
+    height: sizes.screenWidth * 0.18,
+    width: sizes.screenWidth * 0.18,
+    borderRadius: 12,
+    marginRight: sizes.screenWidth * 0.02,
+  },
+
+  historyTitle: {
+    fontFamily: 'Medium',
+    fontSize: fontSize.large,
     color: colors.white,
-    fontWeight: '500',
-    bottom: 2,
   },
 
-  nextIcon: {
+  codeContainerMain: {
+    width: sizes.screenWidth * 0.2,
+    alignItems: 'flex-start',
+  },
+
+  codeContainer: {
+    backgroundColor: colors.bgDark,
+    paddingHorizontal: 8,
+    paddingBottom: 4,
+    paddingTop: 2,
+    marginVertical: 4,
+    borderRadius: 4,
+  },
+
+  textWhiteSmall: {
+    fontFamily: 'Regular',
+    fontSize: fontSize.small,
+    color: colors.white,
+  },
+
+  disabledTextSmall: {
+    fontFamily: 'Regular',
+    fontSize: fontSize.small,
+    color: colors.disabledText,
+  },
+
+  red: {
     height: 14,
     width: 14,
-    resizeMode: 'contain',
-    marginLeft: 4,
-  },
-
-  textArea: {
-    height: sizes.screenHeight * 0.18,
-    width: sizes.screenWidth * 0.9,
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: colors.disabledBg,
-    paddingHorizontal: sizes.screenWidth * 0.02,
+    backgroundColor: colors.red,
   },
 
-  textAreaInput: {
-    fontFamily: 'Medium',
-    fontSize: fontSize.regular,
-    color: colors.disabledText,
+  green: {
+    height: 14,
+    width: 14,
+    borderRadius: 20,
+    backgroundColor: '#3CE861',
+  },
+
+  rightArrow: {
+    height: 20,
+    width: 20,
+    resizeMode: 'contain',
+    margin: 6,
   },
 });
 

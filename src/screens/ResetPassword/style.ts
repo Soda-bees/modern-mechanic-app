@@ -2,6 +2,11 @@ import {StyleSheet} from 'react-native';
 import {colors, fontSize, sizes} from '../../services/utilities';
 
 const styles = StyleSheet.create({
+  main: {
+    height: sizes.screenHeight,
+    width: sizes.screenWidth,
+  },
+
   bg: {
     height: sizes.screenHeight,
     width: sizes.screenWidth,
@@ -9,7 +14,7 @@ const styles = StyleSheet.create({
   },
 
   sectionContainer: {
-    height: sizes.screenHeight,
+    flex: 1,
     width: sizes.screenWidth * 0.9,
     paddingTop: sizes.screenHeight * 0.06,
     alignSelf: 'center',
@@ -147,7 +152,8 @@ const styles = StyleSheet.create({
   },
 
   orangeButtonContainer: {
-    marginTop: sizes.screenHeight * 0.05,
+    position: 'absolute',
+    bottom: sizes.screenHeight * 0.05,
   },
 });
 

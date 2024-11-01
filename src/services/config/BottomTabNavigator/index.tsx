@@ -8,6 +8,7 @@ import images from '../../utilities/images';
 import {colors, fontSize, sizes} from '../../utilities';
 import DashLights from '../../../screens/DashLights';
 import Feedback from '../../../screens/Feedback';
+import Workshops from '../../../screens/Workshops';
 
 const Tab = createBottomTabNavigator();
 
@@ -54,7 +55,7 @@ const BottomTabNavigator: React.FC = () => {
       />
       <Tab.Screen
         name="Workshops"
-        component={LandingNext}
+        component={Workshops}
         options={{tabBarLabel: 'Workshops'}}
       />
       <Tab.Screen
