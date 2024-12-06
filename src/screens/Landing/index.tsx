@@ -48,16 +48,16 @@ const Landing: React.FC = (): JSX.Element => {
         <View style={styles.sectionContainer}>
           <View style={styles.textContainer}>
             <Text style={styles.textLargeBold}>
-              OBD{'\n'}
-              <Text style={styles.textLargeBoldOrange}>Reader.</Text>
+              Modern{'\n'}
+              <Text style={styles.textLargeBoldOrange}>Mechanic</Text>
             </Text>
           </View>
           <Image source={images.landingBg} style={styles.landngBg} />
           <View style={styles.textContainer}>
             <Text style={styles.textLarge}>
-              Your Car's{'\n'}
-              Diagnostics{'\n'}
-              Made Simple
+              Turning Car{'\n'}
+              Problems Into{'\n'}
+              Simple Solutions
             </Text>
             <TouchableOpacity
               style={styles.nextIconContainer}

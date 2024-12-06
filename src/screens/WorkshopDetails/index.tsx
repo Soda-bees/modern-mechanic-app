@@ -51,7 +51,12 @@ const WorkshopDetails: React.FC = (): JSX.Element => {
         <Image source={images.bg} style={styles.bg} />
         <View>
           <View style={styles.screen}>
-            <UserHeader />
+            <View style={styles.header}>
+              <Text style={styles.headerTitle}>
+                Modern
+                <Text style={styles.headerTitleOrange}> Mechanic</Text>
+              </Text>
+            </View>
             <View style={styles.lowerBody}>
               <View style={styles.row}>
                 <TouchableOpacity

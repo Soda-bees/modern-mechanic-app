@@ -202,6 +202,9 @@ const ScanResult: React.FC = (): JSX.Element => {
                     </TouchableOpacity>
                   );
                 })}
+                <TouchableOpacity style={styles.clearCodesBtn}>
+                  <Text style={styles.textWhite2}>Clear Codes</Text>
+                </TouchableOpacity>
               </View>
 
               <Text style={styles.aboutCode}>
@@ -306,7 +309,7 @@ const ScanResult: React.FC = (): JSX.Element => {
                     <View style={styles.upperBody}>
                       <Image source={images.urgencyO} style={styles.urgencyO} />
                       <View style={styles.hr}></View>
-                      <View style={styles.colourRow}>
+                      {/* <View style={styles.colourRow}>
                         <View style={styles.colourColumn}>
                           <View style={styles.row}>
                             <View style={styles.colourG}></View>
@@ -343,7 +346,7 @@ const ScanResult: React.FC = (): JSX.Element => {
                             Major issues, needs immediate attention
                           </Text>
                         </View>
-                      </View>
+                      </View> */}
                     </View>
                   </ScrollView>
 
@@ -413,7 +416,7 @@ const ScanResult: React.FC = (): JSX.Element => {
                         style={styles.urgencyO}
                       />
                       <View style={styles.hr}></View>
-                      <View style={styles.colourContainer}>
+                      {/* <View style={styles.colourContainer}>
                         <View style={styles.colourRow2}>
                           <View style={styles.rowWidth}>
                             <View style={styles.colourB}></View>
@@ -459,7 +462,7 @@ const ScanResult: React.FC = (): JSX.Element => {
                             Skilled, complex, high-risk
                           </Text>
                         </View>
-                      </View>
+                      </View> */}
                     </View>
                   </ScrollView>
                   <View style={styles.bottomRow}>
@@ -742,6 +745,11 @@ const ScanResult: React.FC = (): JSX.Element => {
                           </View>
                         );
                       })}
+                      <TouchableOpacity
+                        style={styles.sendInfoBtn}
+                        onPress={() => {}}>
+                        <Text style={styles.textWhite2}>Send Info</Text>
+                      </TouchableOpacity>
                     </ScrollView>
                   </View>
                   <View style={styles.bottomRow}>

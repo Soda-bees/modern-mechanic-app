@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: sizes.screenHeight * 0.03,
+    marginVertical: sizes.screenHeight * 0.03,
   },
 
   errMsg: {
@@ -154,6 +154,17 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'row',
     marginTop: sizes.screenHeight * 0.1,
+  },
+
+  orangeBtn2: {
+    height: sizes.screenHeight * 0.07,
+    width: sizes.screenWidth * 0.9,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.appOrange,
+    borderRadius: sizes.screenHeight * 0.1,
+    alignSelf: 'center',
+    flexDirection: 'row',
   },
 
   scanIcon: {

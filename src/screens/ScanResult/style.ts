@@ -546,10 +546,33 @@ const styles = StyleSheet.create({
   },
 
   nextIcon: {
-    height: 12,
-    width: 12,
+    height: 11,
+    width: 11,
     resizeMode: 'contain',
     marginLeft: 4,
+  },
+
+  sendInfoBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.appOrange,
+    height: sizes.screenHeight * 0.04,
+    width: sizes.screenWidth * 0.22,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+
+  clearCodesBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.appOrange,
+    height: sizes.screenHeight * 0.035,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginLeft: 'auto',
+    paddingHorizontal: 4,
   },
 });
 

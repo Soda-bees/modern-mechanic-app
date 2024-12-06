@@ -32,21 +32,21 @@ const styles = StyleSheet.create({
 
   textLargeBold: {
     fontFamily: 'SemiBold',
-    fontSize: 54,
+    fontSize: 50,
     fontWeight: '500',
     color: colors.white,
   },
 
   textLargeBoldOrange: {
     fontFamily: 'SemiBold',
-    fontSize: 54,
+    fontSize: 50,
     fontWeight: '500',
     color: colors.appOrange,
   },
 
   textLarge: {
-    fontFamily: 'Regular',
-    fontSize: 52,
+    fontFamily: 'Medium',
+    fontSize: fontSize.h2,
     color: colors.white,
     fontWeight: '300',
   },

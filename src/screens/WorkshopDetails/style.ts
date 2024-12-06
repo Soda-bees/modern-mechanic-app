@@ -13,6 +13,29 @@ const styles = StyleSheet.create({
     width: sizes.screenWidth,
   },
 
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: sizes.screenWidth * 0.9,
+    alignSelf: 'center',
+    marginVertical: sizes.screenHeight * 0.03,
+  },
+
+  headerTitle: {
+    fontFamily: 'SemiBold',
+    fontSize: fontSize.extraLarge,
+    color: colors.white,
+    fontWeight: '500',
+  },
+
+  headerTitleOrange: {
+    fontFamily: 'SemiBold',
+    fontSize: fontSize.extraLarge,
+    color: colors.appOrange,
+    fontWeight: '500',
+  },
+
   lowerBody: {
     flex: 1,
     backgroundColor: colors.bodyGrey,
