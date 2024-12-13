@@ -15,6 +15,7 @@ import Header from '../../components/Header';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../services/config/navigation';
 import {useNavigation} from '@react-navigation/native';
+import {checkEmail} from '../../services/config/API';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'AddVehicle'>;
 
@@ -24,11 +25,39 @@ const SignUp: React.FC = (): JSX.Element => {
   const [errMsg, setErrMsg] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [zipCode, setZipCode] = useState<string>('');
+  const [zipCode, setZipCode] = useState<number>(0);
   const [password, setPassword] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleSignUp = () => {
-    navigation.navigate('AddVehicle');
+  const handleSignUp = async () => {
+    try {
+      setIsLoading(true); // Show loader
+      console.log('Running handleSignUp');
+
+      const response = await checkEmail({email}); // Call checkEmail API
+      console.log('Response:', response);
+
+      if (response?.success) {
+        // Email is available, proceed with navigation
+        setErrMsg('');
+        navigation.navigate('AddVehicle', {
+          userData: {
+            name,
+            email,
+            zipCode,
+            password,
+          },
+        });
+      } else {
+        // Email is already taken, show an error message
+        setErrMsg(response?.message || 'This email is already taken.'); // Default error message if no message in response
+      }
+    } catch (error) {
+      console.error('Error in email validation:', error);
+      setErrMsg('An error occurred. Please try again later.');
+    } finally {
+      setIsLoading(false); // Hide loader
+    }
   };
 
   return (
@@ -76,11 +105,12 @@ const SignUp: React.FC = (): JSX.Element => {
             <Image style={styles.inputIcon} source={images.zipCodeIcon} />
             <TextInput
               onChangeText={text => {
-                setZipCode(text);
+                setZipCode(Number(text));
               }}
               style={styles.input}
               placeholder="Enter your Zip Code"
               placeholderTextColor={colors.disabledText}
+              inputMode="numeric"
             />
           </View>
 

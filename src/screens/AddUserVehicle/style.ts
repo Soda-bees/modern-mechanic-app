@@ -25,77 +25,19 @@ const styles = StyleSheet.create({
     marginVertical: sizes.screenHeight * 0.03,
   },
 
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: sizes.screenWidth * 0.9,
-    alignSelf: 'center',
-    marginTop: sizes.screenHeight * 0.03,
-    justifyContent: 'space-between',
-  },
-
-  headerTitle: {
-    fontFamily: 'SemiBold',
-    fontSize: fontSize.extraLarge,
-    color: colors.white,
-    fontWeight: '500',
-  },
-
-  addVehicleBtn: {
-    backgroundColor: colors.appOrange,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 6,
-    paddingHorizontal: sizes.screenWidth * 0.06,
-    borderRadius: 8,
-  },
-
-  textWhite: {
-    fontFamily: 'Medium',
-    fontSize: fontSize.regular,
-    color: colors.white,
-    fontWeight: '500',
-    bottom: 2,
-  },
-
-  textWhite2: {
-    fontFamily: 'Medium',
-    fontSize: fontSize.regular,
-    color: colors.white,
-    fontWeight: '500',
-  },
-
   sectionContainer: {
     width: sizes.screenWidth * 0.9,
     alignSelf: 'center',
   },
 
-  vehicleCardContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    maxWidth: sizes.screenWidth * 0.9,
-    justifyContent: 'space-between',
-    // gap: sizes.screenWidth * 0.04,
-  },
-
   vehicleContainer: {
+    width: sizes.screenWidth * 0.9,
+    height: sizes.screenHeight * 0.2,
     backgroundColor: colors.grey,
     borderRadius: 20,
-    padding: sizes.screenWidth * 0.015,
-    marginBottom: sizes.screenWidth * 0.04,
-  },
-
-  carImg: {
-    height: sizes.screenHeight * 0.17,
-    width: sizes.screenWidth * 0.4,
-  },
-
-  carImgContainer: {
-    height: sizes.screenHeight * 0.17,
-    width: sizes.screenWidth * 0.4,
-    borderRadius: 15,
-    overflow: 'hidden',
-    marginBottom: 4,
+    alignContent: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
   },
 
   uploadImgContainer: {
@@ -127,7 +69,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Medium',
     fontSize: fontSize.regular,
     color: colors.disabledText,
-    marginBottom: 4,
   },
 
   inputLabel: {

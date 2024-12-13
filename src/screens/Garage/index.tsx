@@ -21,7 +21,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 type NavigationProp = StackNavigationProp<
   RootStackParamList,
-  'EditVehicle' | 'AddVehicle' | 'Landing'
+  'EditVehicle' | 'AddUserVehicle' | 'Landing'
 >;
 
 const Garage: React.FC = (): JSX.Element => {
@@ -47,7 +47,7 @@ const Garage: React.FC = (): JSX.Element => {
   };
 
   const handleSendGoToAdd = () => {
-    navigation.navigate('AddVehicle');
+    navigation.navigate('AddUserVehicle');
   };
 
   const handleContinue = () => {
@@ -77,7 +77,7 @@ const Garage: React.FC = (): JSX.Element => {
                     <View style={styles.carImgContainer}>
                       <Image source={images.carImg} style={styles.carImg} />
                     </View>
-                    <Text style={styles.textWhite}>
+                    <Text style={styles.textWhite2}>
                       {make} {model}
                     </Text>
                     <Text style={styles.disabledText}>{year}</Text>
@@ -92,7 +92,7 @@ const Garage: React.FC = (): JSX.Element => {
                     <View style={styles.carImgContainer}>
                       <Image source={images.carImg} style={styles.carImg} />
                     </View>
-                    <Text style={styles.textWhite}>
+                    <Text style={styles.textWhite2}>
                       {make} {model}
                     </Text>
                     <Text style={styles.disabledText}>{year}</Text>
@@ -107,7 +107,7 @@ const Garage: React.FC = (): JSX.Element => {
                     <View style={styles.carImgContainer}>
                       <Image source={images.carImg} style={styles.carImg} />
                     </View>
-                    <Text style={styles.textWhite}>
+                    <Text style={styles.textWhite2}>
                       {make} {model}
                     </Text>
                     <Text style={styles.disabledText}>{year}</Text>

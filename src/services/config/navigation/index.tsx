@@ -18,6 +18,7 @@ import WorkshopDetails from '../../../screens/WorkshopDetails';
 import ScanResult from '../../../screens/ScanResult';
 import ScanHistory from '../../../screens/ScanHistory';
 import DetailedHistory from '../../../screens/DetailedHistory';
+import AddUserVehicle from '../../../screens/AddUserVehicle';
 
 export type VehicleDataType = {
   make: string;
@@ -25,6 +26,14 @@ export type VehicleDataType = {
   year: string;
   image: any;
   transmission: string;
+};
+
+export type UserDataType = {
+  name: string;
+  email: string;
+  zipCode: number;
+  password: string;
+  cars?: VehicleDataType[];
 };
 
 export type RootStackParamList = {
@@ -35,7 +44,7 @@ export type RootStackParamList = {
   Otp: {email: string};
   ResetPassword: {email: string};
   SignUp: any;
-  AddVehicle: any;
+  AddVehicle: {userData?: UserDataType};
   Garage: any;
   EditVehicle: {vehicleData: VehicleDataType};
   BottomTabNavigator: any;
@@ -45,6 +54,7 @@ export type RootStackParamList = {
   ScanResult: any;
   ScanHistory: any;
   DetailedHistory: any;
+  AddUserVehicle: any;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -75,6 +85,7 @@ const MainNavigator: React.FC = (): JSX.Element => {
         <Stack.Screen name="ScanResult" component={ScanResult} />
         <Stack.Screen name="ScanHistory" component={ScanHistory} />
         <Stack.Screen name="DetailedHistory" component={DetailedHistory} />
+        <Stack.Screen name="AddUserVehicle" component={AddUserVehicle} />
       </Stack.Navigator>
     </NavigationContainer>
   );

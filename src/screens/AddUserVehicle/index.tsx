@@ -20,17 +20,11 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {check, PERMISSIONS, request, RESULTS} from 'react-native-permissions';
-import {RouteProp, useRoute} from '@react-navigation/native';
-import {uploadImage} from '../../services/config/API';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Garage'>;
-type RouteProps = RouteProp<RootStackParamList, 'AddVehicle'>;
 
-const AddVehicle: React.FC = (): JSX.Element => {
+const AddUserVehicle: React.FC = (): JSX.Element => {
   const navigation = useNavigation<NavigationProp>();
-  const route = useRoute<RouteProps>();
-  const {userData} = route.params;
-  console.log(userData);
 
   const [email, setEmail] = useState<string>('');
   const [errMsg, setErrMsg] = useState<string>('');
@@ -39,10 +33,7 @@ const AddVehicle: React.FC = (): JSX.Element => {
   const [year, setYear] = useState<string>('');
   const [transmission, setTransmission] = useState<string>('Automatic');
   const [imageUri, setImageUri] = useState<any>(null); // To store the image URI
-  const [isUploading, setIsUploading] = useState<boolean>(false); // For loading indicator
-  const [uploadedImageUrl, setUploadedImageUrl] = useState<string | undefined>(
-    undefined,
-  );
+  console.log(imageUri);
 
   // Function to check for camera permission
   const requestCameraPermission = async () => {
@@ -111,31 +102,8 @@ const AddVehicle: React.FC = (): JSX.Element => {
     }
   };
 
-  const handleSave = async () => {
-    if (!make || !model || !year || !imageUri) {
-      Alert.alert(
-        'Validation Error',
-        'Please fill all fields and upload an image.',
-      );
-      return;
-    }
-
-    setIsUploading(true);
-    try {
-      // Call the uploadImage API
-      const response = await uploadImage({imageUri});
-      if (response?.success) {
-        setUploadedImageUrl(response.url); // Store the uploaded image URL
-        Alert.alert('Success', 'Vehicle added successfully!');
-        navigation.navigate('Garage');
-      } else {
-        Alert.alert('Error', response?.message || 'Image upload failed.');
-      }
-    } catch (error) {
-      Alert.alert('Error', 'An error occurred while uploading the image.');
-    } finally {
-      setIsUploading(false);
-    }
+  const handleSave = () => {
+    navigation.navigate('Garage');
   };
 
   return (
@@ -216,7 +184,6 @@ const AddVehicle: React.FC = (): JSX.Element => {
                     style={styles.input}
                     placeholder="Year"
                     placeholderTextColor={colors.disabledText}
-                    inputMode="numeric"
                   />
                 </View>
 
@@ -271,4 +238,4 @@ const AddVehicle: React.FC = (): JSX.Element => {
   );
 };
 
-export default AddVehicle;
+export default AddUserVehicle;
