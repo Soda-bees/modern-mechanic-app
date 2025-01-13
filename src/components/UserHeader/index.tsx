@@ -4,7 +4,11 @@ import images from '../../services/utilities/images'; // Assuming you have the i
 import {colors, fontSize, sizes} from '../../services/utilities';
 import {useNavigation} from '@react-navigation/native';
 
-const UserHeader: React.FC = (): JSX.Element => {
+interface UserHeaderProps {
+  onPress: () => void;
+}
+
+const UserHeader: React.FC<UserHeaderProps> = ({onPress}): JSX.Element => {
   const navigation = useNavigation();
 
   const handleGoBack = () => {
@@ -19,11 +23,11 @@ const UserHeader: React.FC = (): JSX.Element => {
       </Text>
 
       <View style={styles.headerRightSection}>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <Image source={images.settingsIcon} style={styles.settingsIcon} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
-        <TouchableOpacity style={styles.userIconContainer}>
+        <TouchableOpacity style={styles.userIconContainer} onPress={onPress}>
           <Image source={images.userIcon} style={styles.userIcon} />
         </TouchableOpacity>
       </View>

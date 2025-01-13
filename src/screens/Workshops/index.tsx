@@ -16,13 +16,13 @@ import UserHeader from '../../components/UserHeader';
 import Modal from 'react-native-modal';
 import {StarRatingDisplay} from 'react-native-star-rating-widget';
 import {colors} from '../../services/utilities';
-type NavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'WorkshopDetails'
->;
+type NavigationProp = StackNavigationProp<RootStackParamList, 'Profile'>;
 
 const Workshops: React.FC = (): JSX.Element => {
   const navigation = useNavigation<NavigationProp>();
+  const handleGoToProfile = () => {
+    navigation.navigate('Profile');
+  };
 
   const [email, setEmail] = useState<string>('');
   const [errMsg, setErrMsg] = useState<string>('');
@@ -104,7 +104,7 @@ const Workshops: React.FC = (): JSX.Element => {
         <Image source={images.bg} style={styles.bg} />
         <View>
           <View style={styles.screen}>
-            <UserHeader />
+            <UserHeader onPress={handleGoToProfile} />
             <View style={styles.lowerBody}>
               <Text style={styles.title}>Workshops</Text>
 

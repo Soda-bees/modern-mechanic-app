@@ -6,6 +6,7 @@ import {
   Image,
   TextInput,
   Platform,
+  Alert,
 } from 'react-native';
 import styles from './style';
 import images from '../../services/utilities/images';
@@ -22,6 +23,8 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
+import {verifyOtp, VerifyOtpBody} from '../../services/config/API';
+import OrangeButtonLoader from '../../components/OrangeButtonLoader';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'ResetPassword'>;
 type RouteProps = RouteProp<RootStackParamList, 'Otp'>;
@@ -33,6 +36,7 @@ const Otp: React.FC = (): JSX.Element => {
 
   const [errMsg, setErrMsg] = useState<string>('');
   const [value, setValue] = useState('');
+  const [loader, setLoader] = useState<boolean>(false);
 
   const CELL_COUNT = 4;
   const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
@@ -41,8 +45,38 @@ const Otp: React.FC = (): JSX.Element => {
     setValue,
   });
 
-  const handleVerify = () => {
-    navigation.navigate('ResetPassword', {email});
+  const handleVerify = async () => {
+    if (!value) {
+      Alert.alert('Error', 'Please enter your otp to continue.');
+      return;
+    }
+    setLoader(true);
+
+    try {
+      const body: VerifyOtpBody = {
+        email: email,
+        otp: value,
+      };
+
+      const response = await verifyOtp(body);
+      console.log(response);
+
+      if (response?.success) {
+        console.log(response.message);
+        setLoader(false);
+        navigation.navigate('ResetPassword', {email});
+      } else {
+        setLoader(false);
+        Alert.alert(
+          'Error',
+          response?.message || 'Something went wrong. Please try again later.',
+        );
+      }
+    } catch (error) {
+      setLoader(false);
+      console.error('Error during login:', error);
+      Alert.alert('Error', 'Something went wrong. Please try again later.');
+    }
   };
 
   return (
@@ -80,7 +114,11 @@ const Otp: React.FC = (): JSX.Element => {
           </View>
           <Text style={styles.errMsg}>{errMsg}</Text>
           <View style={styles.orangeButtonContainer}>
-            <OrangeButton title="Verify" onPress={handleVerify} />
+            {loader ? (
+              <OrangeButtonLoader />
+            ) : (
+              <OrangeButton title="Verify" onPress={handleVerify} />
+            )}
           </View>
         </View>
       </View>

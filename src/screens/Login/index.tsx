@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import styles from './style';
 import images from '../../services/utilities/images';
@@ -15,6 +16,12 @@ import Header from '../../components/Header';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../services/config/navigation';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {LogIn, LoginBody, LoginResponse} from '../../services/config/API';
+import {AppDispatch} from '../../store';
+import {setAuthToken} from '../../store/authSlice';
+import {setUserData} from '../../store/userSlice';
+import OrangeButtonLoader from '../../components/OrangeButtonLoader';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'ForgotPassword'>;
 
@@ -24,13 +31,49 @@ const Login: React.FC = (): JSX.Element => {
   const [errMsg, setErrMsg] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [loader, setLoader] = useState<boolean>(false);
+  const dispatch: AppDispatch = useDispatch();
 
   const handlNavigation = () => {
     navigation.navigate('ForgotPassword');
   };
 
-  const handleLogin = () => {
-    navigation.navigate('BottomTabNavigator');
+  // const handleLogin = () => {
+  // navigation.navigate('BottomTabNavigator');
+  // };
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Please fill in both email and password.');
+      return;
+    }
+    setLoader(true);
+
+    try {
+      const body: LoginBody = {
+        email: email,
+        password: password,
+      };
+
+      const response = await LogIn(body);
+      console.log(response);
+
+      if (response?.success) {
+        setLoader(false);
+        dispatch(setUserData(response?.userData));
+        dispatch(setAuthToken(response?.token));
+      } else {
+        // Handle errors returned from the API
+        setLoader(false);
+
+        Alert.alert('Error', response?.message || 'Login failed');
+      }
+    } catch (error) {
+      setLoader(false);
+
+      console.error('Error during login:', error);
+      Alert.alert('Error', 'Something went wrong. Please try again later.');
+    }
   };
 
   return (
@@ -92,8 +135,11 @@ const Login: React.FC = (): JSX.Element => {
           </TouchableOpacity>
 
           <Text style={styles.errMsg}>{errMsg}</Text>
-
-          <OrangeButton title="Log In" onPress={handleLogin} />
+          {loader ? (
+            <OrangeButtonLoader />
+          ) : (
+            <OrangeButton title="Log In" onPress={handleLogin} />
+          )}
 
           <View style={styles.hrContainer}>
             <View style={styles.hr}></View>

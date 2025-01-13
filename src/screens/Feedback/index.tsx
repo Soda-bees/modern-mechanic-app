@@ -16,7 +16,10 @@ import UserHeader from '../../components/UserHeader';
 import Modal from 'react-native-modal';
 import {StarRatingDisplay} from 'react-native-star-rating-widget';
 import {colors} from '../../services/utilities';
-type NavigationProp = StackNavigationProp<RootStackParamList, 'Review'>;
+type NavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Review' | 'Profile'
+>;
 
 const Feedback: React.FC = (): JSX.Element => {
   const navigation = useNavigation<NavigationProp>();
@@ -60,13 +63,17 @@ const Feedback: React.FC = (): JSX.Element => {
     navigation.navigate('Review');
   };
 
+  const handleGoToProfile = () => {
+    navigation.navigate('Profile');
+  };
+
   return (
     <SafeAreaView>
       <View>
         <Image source={images.bg} style={styles.bg} />
         <View>
           <View style={styles.screen}>
-            <UserHeader />
+            <UserHeader onPress={handleGoToProfile} />
             <View style={styles.lowerBody}>
               <Text style={styles.title}>Feedback</Text>
 

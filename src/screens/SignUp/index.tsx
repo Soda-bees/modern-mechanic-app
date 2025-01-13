@@ -16,6 +16,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../services/config/navigation';
 import {useNavigation} from '@react-navigation/native';
 import {checkEmail} from '../../services/config/API';
+import OrangeButtonLoader from '../../components/OrangeButtonLoader';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'AddVehicle'>;
 
@@ -40,6 +41,7 @@ const SignUp: React.FC = (): JSX.Element => {
       if (response?.success) {
         // Email is available, proceed with navigation
         setErrMsg('');
+        setIsLoading(false);
         navigation.navigate('AddVehicle', {
           userData: {
             name,
@@ -51,10 +53,12 @@ const SignUp: React.FC = (): JSX.Element => {
       } else {
         // Email is already taken, show an error message
         setErrMsg(response?.message || 'This email is already taken.'); // Default error message if no message in response
+        setIsLoading(false);
       }
     } catch (error) {
       console.error('Error in email validation:', error);
       setErrMsg('An error occurred. Please try again later.');
+      setIsLoading(false);
     } finally {
       setIsLoading(false); // Hide loader
     }
@@ -149,8 +153,11 @@ const SignUp: React.FC = (): JSX.Element => {
           </View>
 
           <Text style={styles.errMsg}>{errMsg}</Text>
-
-          <OrangeButton title="Sign Up" onPress={handleSignUp} />
+          {isLoading ? (
+            <OrangeButtonLoader />
+          ) : (
+            <OrangeButton title="Sign Up" onPress={handleSignUp} />
+          )}
 
           <View style={styles.hrContainer}>
             <View style={styles.hr}></View>

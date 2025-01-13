@@ -14,7 +14,10 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserHeader from '../../components/UserHeader';
 import Modal from 'react-native-modal';
-type NavigationProp = StackNavigationProp<RootStackParamList, 'Scann'>;
+type NavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Scann' | 'Profile'
+>;
 
 const DashLights: React.FC = (): JSX.Element => {
   const navigation = useNavigation<NavigationProp>();
@@ -76,13 +79,17 @@ const DashLights: React.FC = (): JSX.Element => {
 
   const handleModal = () => {};
 
+  const handleGoToProfile = () => {
+    navigation.navigate('Profile');
+  };
+
   return (
     <SafeAreaView>
       <View>
         <Image source={images.bg} style={styles.bg} />
         <View>
           <View style={styles.screen}>
-            <UserHeader />
+            <UserHeader onPress={handleGoToProfile} />
             <View style={styles.lowerBody}>
               <Text style={styles.title}>Dash Lights</Text>
 

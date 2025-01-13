@@ -9,6 +9,7 @@ import {
   Alert,
   Linking,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
 import styles from './style';
 import images from '../../services/utilities/images';
@@ -21,7 +22,13 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {check, PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 import {RouteProp, useRoute} from '@react-navigation/native';
-import {uploadImage} from '../../services/config/API';
+import {signUp, uploadImage} from '../../services/config/API';
+import OrangeButtonLoader from '../../components/OrangeButtonLoader';
+import {SignupBody} from '../../services/config/API';
+import {AppDispatch} from '../../store';
+import {useDispatch, useSelector} from 'react-redux';
+import {selectAuthToken, setAuthToken} from '../../store/authSlice';
+import {selectUserData, setUserData} from '../../store/userSlice';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Garage'>;
 type RouteProps = RouteProp<RootStackParamList, 'AddVehicle'>;
@@ -30,7 +37,11 @@ const AddVehicle: React.FC = (): JSX.Element => {
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RouteProps>();
   const {userData} = route.params;
-  console.log(userData);
+  // console.log(userData);
+  const dispatch: AppDispatch = useDispatch();
+  const authToken = useSelector(selectAuthToken);
+  const userDataRedux = useSelector(selectUserData);
+  console.log('token and user info:', authToken, userDataRedux);
 
   const [email, setEmail] = useState<string>('');
   const [errMsg, setErrMsg] = useState<string>('');
@@ -40,6 +51,7 @@ const AddVehicle: React.FC = (): JSX.Element => {
   const [transmission, setTransmission] = useState<string>('Automatic');
   const [imageUri, setImageUri] = useState<any>(null); // To store the image URI
   const [isUploading, setIsUploading] = useState<boolean>(false); // For loading indicator
+  const [loader, setLoader] = useState<boolean>(false);
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | undefined>(
     undefined,
   );
@@ -94,8 +106,12 @@ const AddVehicle: React.FC = (): JSX.Element => {
       quality: 1,
     });
 
-    if (result.assets && result.assets.length > 0) {
-      setImageUri(result.assets[0].uri); // Set the captured image URI
+    const imageUri = result?.assets?.[0]?.uri;
+
+    if (imageUri) {
+      handleUploadImage(imageUri); // Call only if imageUri is a valid string
+    } else {
+      Alert.alert('Error', 'No image selected.');
     }
   };
 
@@ -106,28 +122,22 @@ const AddVehicle: React.FC = (): JSX.Element => {
       quality: 1,
     });
 
-    if (result.assets && result.assets.length > 0) {
-      setImageUri(result.assets[0].uri); // Set the selected image URI
+    const imageUri = result?.assets?.[0]?.uri;
+
+    if (imageUri) {
+      handleUploadImage(imageUri); // Call only if imageUri is a valid string
+    } else {
+      Alert.alert('Error', 'No image selected.');
     }
   };
 
-  const handleSave = async () => {
-    if (!make || !model || !year || !imageUri) {
-      Alert.alert(
-        'Validation Error',
-        'Please fill all fields and upload an image.',
-      );
-      return;
-    }
-
+  const handleUploadImage = async (imageUri: string) => {
     setIsUploading(true);
     try {
-      // Call the uploadImage API
       const response = await uploadImage({imageUri});
       if (response?.success) {
+        setImageUri(response.url);
         setUploadedImageUrl(response.url); // Store the uploaded image URL
-        Alert.alert('Success', 'Vehicle added successfully!');
-        navigation.navigate('Garage');
       } else {
         Alert.alert('Error', response?.message || 'Image upload failed.');
       }
@@ -135,6 +145,72 @@ const AddVehicle: React.FC = (): JSX.Element => {
       Alert.alert('Error', 'An error occurred while uploading the image.');
     } finally {
       setIsUploading(false);
+    }
+  };
+
+  const handleSave = async () => {
+    if (isUploading) {
+      return;
+    }
+    // Validate input fields
+    if (!make || !model || !year || !imageUri) {
+      Alert.alert(
+        'Validation Error',
+        'Please fill all required fields, including uploading an image.',
+      );
+      return;
+    }
+
+    if (
+      !userData?.name ||
+      !userData?.email ||
+      !userData?.zipCode ||
+      !userData?.password
+    ) {
+      Alert.alert(
+        'Validation Error',
+        'User details are incomplete. Please provide all required information.',
+      );
+      return;
+    }
+
+    setLoader(true); // Start loader
+    try {
+      // Prepare the body for the API call
+      const body: SignupBody = {
+        name: userData?.name, // from state or form
+        email: userData?.email, // from state or form
+        zipCode: userData?.zipCode, // from state or form
+        password: userData?.password, // from state or form
+        cars: [
+          {
+            image: imageUri, // from image picker
+            make, // from form input
+            model, // from form input
+            year: Number(year), // Convert year to number if it's a string
+            transmission, // from form input
+          },
+        ],
+      };
+
+      console.log(body);
+
+      // Call the signup API
+      const response = await signUp(body);
+      console.log('Sign Up Response:', response);
+      if (response?.success) {
+        // Alert.alert('Success', 'Vehicle added successfully!');
+        // Optionally navigate to another screen or clear inputs
+        dispatch(setUserData(response.userDeta));
+        dispatch(setAuthToken(response.token));
+      } else {
+        Alert.alert('Error', response?.message || 'Sign Up Failed.');
+      }
+    } catch (error) {
+      Alert.alert('Error', 'An error occurred while signing up.');
+      console.error('Error:', error);
+    } finally {
+      setLoader(false); // Stop loader
     }
   };
 
@@ -158,20 +234,29 @@ const AddVehicle: React.FC = (): JSX.Element => {
                         {text: 'Cancel', style: 'cancel'},
                       ])
                     }>
-                    {imageUri ? (
-                      <Image
-                        style={styles.uploadImgPreview}
-                        source={{uri: imageUri}}
+                    {isUploading ? (
+                      <ActivityIndicator
+                        color={colors.disabledText}
+                        size={40}
                       />
                     ) : (
                       <>
-                        <Image
-                          style={styles.uploadImgIcon}
-                          source={images.uploadImgIcon}
-                        />
-                        <Text style={styles.uploadImgText}>
-                          Upload Vehicle Image
-                        </Text>
+                        {imageUri ? (
+                          <Image
+                            style={styles.uploadImgPreview}
+                            source={{uri: imageUri}}
+                          />
+                        ) : (
+                          <>
+                            <Image
+                              style={styles.uploadImgIcon}
+                              source={images.uploadImgIcon}
+                            />
+                            <Text style={styles.uploadImgText}>
+                              Upload Vehicle Image
+                            </Text>
+                          </>
+                        )}
                       </>
                     )}
                   </TouchableOpacity>
@@ -263,7 +348,12 @@ const AddVehicle: React.FC = (): JSX.Element => {
             </View>
 
             <Text style={styles.errMsg}>{errMsg}</Text>
-            <OrangeButton title="Save Vehicle" onPress={handleSave} />
+
+            {loader ? (
+              <OrangeButtonLoader />
+            ) : (
+              <OrangeButton title="Save Vehicle" onPress={handleSave} />
+            )}
           </View>
         </View>
       </View>

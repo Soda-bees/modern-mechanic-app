@@ -55,6 +55,8 @@ import socket from '../../../assets/socket.png';
 import obd from '../../../assets/obd.png';
 import searchIcon from '../../../assets/searchIcon.png';
 import rightArrow from '../../../assets/rightArrow.png';
+import rightIcon from '../../../assets/rightIcon.png';
+import logOutIcon from '../../../assets/logOutIcon.png';
 
 const images: {[key: string]: any} = {
   landingBg,
@@ -114,6 +116,8 @@ const images: {[key: string]: any} = {
   obd,
   searchIcon,
   rightArrow,
+  rightIcon,
+  logOutIcon,
 };
 
 export default images;

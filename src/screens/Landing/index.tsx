@@ -6,11 +6,18 @@ import images from '../../services/utilities/images';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../services/config/navigation/index';
+import {AppDispatch} from '../../store';
+import {useDispatch, useSelector} from 'react-redux';
+import {selectAuthToken, setAuthToken} from '../../store/authSlice';
+import {selectUserData} from '../../store/userSlice';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'LandingNext'>;
 
 const Landing: React.FC = (): JSX.Element => {
   const navigation = useNavigation<NavigationProp>();
+  const authToken = useSelector(selectAuthToken);
+  const userDataRedux = useSelector(selectUserData);
+  console.log('token and user info:', authToken, userDataRedux);
 
   const handleContinue = () => {
     navigation.navigate('LandingNext');

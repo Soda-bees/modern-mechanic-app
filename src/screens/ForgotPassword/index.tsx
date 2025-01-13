@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, Text, View, Image, TextInput} from 'react-native';
+import {SafeAreaView, Text, View, Image, TextInput, Alert} from 'react-native';
 import styles from './style';
 import images from '../../services/utilities/images';
 import {colors, sizes} from '../../services/utilities';
@@ -8,6 +8,8 @@ import Header from '../../components/Header';
 import {RootStackParamList} from '../../services/config/navigation';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {sendOtp, SendOtpBody} from '../../services/config/API';
+import OrangeButtonLoader from '../../components/OrangeButtonLoader';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Otp'>;
 
@@ -16,13 +18,39 @@ const ForgotPassword: React.FC = (): JSX.Element => {
 
   const [email, setEmail] = useState<string>('');
   const [errMsg, setErrMsg] = useState<string>('');
+  const [loader, setLoader] = useState<boolean>(false);
 
-  const handleSend = () => {
-    // if (email) {
-    navigation.navigate('Otp', {email});
-    // } else {
-    //   setErrMsg('*Please enter a valid email.');
-    // }
+  const handleSend = async () => {
+    if (!email) {
+      Alert.alert('Error', 'Please enter your email to continue.');
+      return;
+    }
+    setLoader(true);
+
+    try {
+      const body: SendOtpBody = {
+        email: email,
+      };
+
+      const response = await sendOtp(body);
+      console.log(response);
+
+      if (response?.success) {
+        console.log(response.otp);
+        setLoader(false);
+        navigation.navigate('Otp', {email});
+      } else {
+        setLoader(false);
+        Alert.alert(
+          'Error',
+          response?.message || 'Something went wrong. Please try again later.',
+        );
+      }
+    } catch (error) {
+      setLoader(false);
+      console.error('Error during login:', error);
+      Alert.alert('Error', 'Something went wrong. Please try again later.');
+    }
   };
 
   return (
@@ -56,7 +84,11 @@ const ForgotPassword: React.FC = (): JSX.Element => {
 
           <Text style={styles.errMsg}>{errMsg}</Text>
           <View style={styles.orangeButtonContainer}>
-            <OrangeButton title="Send" onPress={handleSend} />
+            {loader ? (
+              <OrangeButtonLoader />
+            ) : (
+              <OrangeButton title="Send" onPress={handleSend} />
+            )}
           </View>
         </View>
       </View>

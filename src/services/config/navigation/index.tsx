@@ -19,6 +19,12 @@ import ScanResult from '../../../screens/ScanResult';
 import ScanHistory from '../../../screens/ScanHistory';
 import DetailedHistory from '../../../screens/DetailedHistory';
 import AddUserVehicle from '../../../screens/AddUserVehicle';
+import BLEScanScreen from '../../../screens/BLEScanScreen';
+import {useSelector} from 'react-redux';
+import {selectAuthToken} from '../../../store/authSlice';
+import Profile from '../../../screens/Profile';
+import EditProfile from '../../../screens/EditProfile';
+import Security from '../../../screens/Security';
 
 export type VehicleDataType = {
   make: string;
@@ -55,40 +61,126 @@ export type RootStackParamList = {
   ScanHistory: any;
   DetailedHistory: any;
   AddUserVehicle: any;
+  BLEScanScreen: any;
+  Profile: any;
+  EditProfile: any;
+  Security: any;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 const MainNavigator: React.FC = (): JSX.Element => {
+  const authToken = useSelector(selectAuthToken);
+
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{headerShown: false}}
-        initialRouteName="Landing">
-        <Stack.Screen name="Landing" component={Landing} />
-        <Stack.Screen
-          name="BottomTabNavigator"
-          component={BottomTabNavigator}
-        />
-        <Stack.Screen name="LandingNext" component={LandingNext} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-        <Stack.Screen name="Otp" component={Otp} />
-        <Stack.Screen name="ResetPassword" component={ResetPassword} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="AddVehicle" component={AddVehicle} />
-        <Stack.Screen name="Garage" component={Garage} />
-        <Stack.Screen name="EditVehicle" component={EditVehicle} />
-        <Stack.Screen name="Scann" component={Scann} />
-        <Stack.Screen name="Review" component={Review} />
-        <Stack.Screen name="WorkshopDetails" component={WorkshopDetails} />
-        <Stack.Screen name="ScanResult" component={ScanResult} />
-        <Stack.Screen name="ScanHistory" component={ScanHistory} />
-        <Stack.Screen name="DetailedHistory" component={DetailedHistory} />
-        <Stack.Screen name="AddUserVehicle" component={AddUserVehicle} />
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        {!authToken ? (
+          <>
+            <Stack.Screen name="Landing" component={Landing} />
+            <Stack.Screen name="LandingNext" component={LandingNext} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+            <Stack.Screen name="Otp" component={Otp} />
+            <Stack.Screen name="ResetPassword" component={ResetPassword} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="AddVehicle" component={AddVehicle} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              name="BottomTabNavigator"
+              component={BottomTabNavigator}
+            />
+            <Stack.Screen name="Garage" component={Garage} />
+            <Stack.Screen name="EditVehicle" component={EditVehicle} />
+            <Stack.Screen name="Scann" component={Scann} />
+            <Stack.Screen name="Review" component={Review} />
+            <Stack.Screen name="WorkshopDetails" component={WorkshopDetails} />
+            <Stack.Screen name="ScanResult" component={ScanResult} />
+            <Stack.Screen name="ScanHistory" component={ScanHistory} />
+            <Stack.Screen name="DetailedHistory" component={DetailedHistory} />
+            <Stack.Screen name="AddUserVehicle" component={AddUserVehicle} />
+            <Stack.Screen name="BLEScanScreen" component={BLEScanScreen} />
+            <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="EditProfile" component={EditProfile} />
+            <Stack.Screen name="Security" component={Security} />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
 export default MainNavigator;
+
+{
+  /* <NavigationContainer>
+<Stack.Navigator
+  screenOptions={{headerShown: false}}
+  initialRouteName={authToken ? 'BottomTabNavigator' : 'Landing'}>
+  <Stack.Screen name="Landing" component={Landing} />
+  <Stack.Screen
+    name="BottomTabNavigator"
+    component={BottomTabNavigator}
+  />
+  <Stack.Screen name="LandingNext" component={LandingNext} />
+  <Stack.Screen name="Login" component={Login} />
+  <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+  <Stack.Screen name="Otp" component={Otp} />
+  <Stack.Screen name="ResetPassword" component={ResetPassword} />
+  <Stack.Screen name="SignUp" component={SignUp} />
+  <Stack.Screen name="AddVehicle" component={AddVehicle} />
+  <Stack.Screen name="Garage" component={Garage} />
+  <Stack.Screen name="EditVehicle" component={EditVehicle} />
+  <Stack.Screen name="Scann" component={Scann} />
+  <Stack.Screen name="Review" component={Review} />
+  <Stack.Screen name="WorkshopDetails" component={WorkshopDetails} />
+  <Stack.Screen name="ScanResult" component={ScanResult} />
+  <Stack.Screen name="ScanHistory" component={ScanHistory} />
+  <Stack.Screen name="DetailedHistory" component={DetailedHistory} />
+  <Stack.Screen name="AddUserVehicle" component={AddUserVehicle} />
+  <Stack.Screen name="BLEScanScreen" component={BLEScanScreen} />
+</Stack.Navigator>
+</NavigationContainer> */
+}
+
+// old approach
+
+{
+  /* <NavigationContainer>
+{!authToken ? (
+  <Stack.Navigator
+    screenOptions={{headerShown: false}}
+    initialRouteName={'Landing'}>
+    <Stack.Screen name="Landing" component={Landing} />
+    <Stack.Screen name="LandingNext" component={LandingNext} />
+    <Stack.Screen name="Login" component={Login} />
+    <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+    <Stack.Screen name="Otp" component={Otp} />
+    <Stack.Screen name="ResetPassword" component={ResetPassword} />
+    <Stack.Screen name="SignUp" component={SignUp} />
+    <Stack.Screen name="AddVehicle" component={AddVehicle} />
+  </Stack.Navigator>
+) : (
+  <Stack.Navigator
+    screenOptions={{headerShown: false}}
+    initialRouteName={'BottomTabNavigator'}>
+    <Stack.Screen
+      name="BottomTabNavigator"
+      component={BottomTabNavigator}
+    />
+    <Stack.Screen name="Garage" component={Garage} />
+    <Stack.Screen name="EditVehicle" component={EditVehicle} />
+    <Stack.Screen name="Scann" component={Scann} />
+    <Stack.Screen name="Review" component={Review} />
+    <Stack.Screen name="WorkshopDetails" component={WorkshopDetails} />
+    <Stack.Screen name="ScanResult" component={ScanResult} />
+    <Stack.Screen name="ScanHistory" component={ScanHistory} />
+    <Stack.Screen name="DetailedHistory" component={DetailedHistory} />
+    <Stack.Screen name="AddUserVehicle" component={AddUserVehicle} />
+    <Stack.Screen name="BLEScanScreen" component={BLEScanScreen} />
+  </Stack.Navigator>
+)}
+</NavigationContainer> */
+}

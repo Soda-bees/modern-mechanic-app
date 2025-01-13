@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
   },
 
   bottomRow2: {
-    marginBottom: sizes.screenHeight * 0.05,
+    marginBottom: sizes.screenHeight * 0.02,
   },
 
   bottomMeter: {
@@ -280,6 +280,16 @@ const styles = StyleSheet.create({
     fontFamily: 'Medium',
     fontSize: fontSize.regular,
     color: colors.disabledText,
+  },
+
+  deviceItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.disabledText,
+    flexDirection: 'column',
+    marginVertical: 5,
+    backgroundColor: colors.cardBackground,
+    borderRadius: 5,
   },
 });
 
