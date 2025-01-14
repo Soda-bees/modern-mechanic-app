@@ -29,9 +29,10 @@ import Security from '../../../screens/Security';
 export type VehicleDataType = {
   make: string;
   model: string;
-  year: string;
+  year: number;
   image: any;
   transmission: string;
+  id: number;
 };
 
 export type UserDataType = {

@@ -7,14 +7,25 @@ interface Car {
   model: string;
   year: number;
   transmission: string;
+  id: number;
+}
+
+interface Review {
+  id: number;
+  userId: number;
+  reviewerName: string;
+  reviewText: string;
+  rating: number;
+  createdAt: Date;
 }
 
 interface UserData {
-  id: string;
+  id: number;
   name: string;
   email: string;
   zipCode: number;
   cars: Car[];
+  review?: Review;
 }
 
 interface UserState {

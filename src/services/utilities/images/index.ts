@@ -57,6 +57,7 @@ import searchIcon from '../../../assets/searchIcon.png';
 import rightArrow from '../../../assets/rightArrow.png';
 import rightIcon from '../../../assets/rightIcon.png';
 import logOutIcon from '../../../assets/logOutIcon.png';
+import deleteIcon from '../../../assets/deleteIcon.png';
 
 const images: {[key: string]: any} = {
   landingBg,
@@ -118,6 +119,7 @@ const images: {[key: string]: any} = {
   rightArrow,
   rightIcon,
   logOutIcon,
+  deleteIcon,
 };
 
 export default images;

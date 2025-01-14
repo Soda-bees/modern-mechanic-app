@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {colors, fontSize, sizes} from '../../services/utilities';
+import SignUp from '../SignUp';
 
 const styles = StyleSheet.create({
   bg: {
@@ -34,6 +35,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 
+  backTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  backIconContainer: {
+    marginRight: sizes.screenWidth * 0.03,
+  },
+
+  backIcon: {
+    width: 26,
+    height: 26,
+    resizeMode: 'contain',
+    top: 3,
+  },
+
   headerTitle: {
     fontFamily: 'SemiBold',
     fontSize: fontSize.extraLarge,
@@ -63,6 +80,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.regular,
     color: colors.white,
     fontWeight: '500',
+    maxWidth: sizes.screenWidth * 0.4,
   },
 
   sectionContainer: {
@@ -88,6 +106,24 @@ const styles = StyleSheet.create({
   carImg: {
     height: sizes.screenHeight * 0.17,
     width: sizes.screenWidth * 0.4,
+  },
+
+  deleteIconContainer: {
+    position: 'absolute',
+    right: 6,
+    top: 6,
+    backgroundColor: '#ffffff66',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 30,
+    width: 30,
+  },
+
+  deleteIcon: {
+    height: 22,
+    width: 22,
+    resizeMode: 'contain',
   },
 
   carImgContainer: {

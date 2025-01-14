@@ -9,6 +9,7 @@ import {
   Alert,
   Linking,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
 import styles from './style';
 import images from '../../services/utilities/images';
@@ -20,6 +21,16 @@ import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {check, PERMISSIONS, request, RESULTS} from 'react-native-permissions';
+import {
+  editVehicle,
+  EditVehicleBody,
+  uploadImage,
+} from '../../services/config/API';
+import {useDispatch, useSelector} from 'react-redux';
+import {selectAuthToken} from '../../store/authSlice';
+import {AppDispatch} from '../../store';
+import {setUserData} from '../../store/userSlice';
+import OrangeButtonLoader from '../../components/OrangeButtonLoader';
 
 type RouteProps = RouteProp<RootStackParamList, 'EditVehicle'>;
 
@@ -27,17 +38,22 @@ const EditVehicle: React.FC = (): JSX.Element => {
   const navigation = useNavigation();
   const route = useRoute<RouteProps>();
   const {vehicleData} = route.params;
-
+  const authToken = useSelector(selectAuthToken);
+  const dispatch: AppDispatch = useDispatch();
   const [errMsg, setErrMsg] = useState<string>('');
-  const [makeNew, setMakeNew] = useState<string>(vehicleData.make);
-  const [modelNew, setModelNew] = useState<string>(vehicleData.model);
-  const [yearNew, setYearNew] = useState<string>(vehicleData.year);
+  const [makeNew, setMakeNew] = useState<string>(vehicleData?.make);
+  const [modelNew, setModelNew] = useState<string>(vehicleData?.model);
+  const [yearNew, setYearNew] = useState<number>(vehicleData?.year);
   const [transmissionNew, setTransmissionNew] = useState<string>(
-    vehicleData.transmission,
+    vehicleData?.transmission,
   );
-  const [imageUri, setImageUri] = useState<any>(vehicleData.image);
+  const [imageUri, setImageUri] = useState<any>(vehicleData?.image);
+  const [isUploading, setIsUploading] = useState<boolean>(false); // For loading indicator
+  const [loader, setLoader] = useState<boolean>(false);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string | undefined>(
+    undefined,
+  );
 
-  // Function to check for camera permission
   const requestCameraPermission = async () => {
     const result = await request(PERMISSIONS.ANDROID.CAMERA); // For Android
     if (result === RESULTS.GRANTED) {
@@ -87,8 +103,12 @@ const EditVehicle: React.FC = (): JSX.Element => {
       quality: 1,
     });
 
-    if (result.assets && result.assets.length > 0) {
-      setImageUri(result.assets[0].uri); // Set the captured image URI
+    const imageUri = result?.assets?.[0]?.uri;
+
+    if (imageUri) {
+      handleUploadImage(imageUri); // Call only if imageUri is a valid string
+    } else {
+      Alert.alert('Error', 'No image selected.');
     }
   };
 
@@ -99,14 +119,106 @@ const EditVehicle: React.FC = (): JSX.Element => {
       quality: 1,
     });
 
-    if (result.assets && result.assets.length > 0) {
-      setImageUri(result.assets[0].uri); // Set the selected image URI
+    const imageUri = result?.assets?.[0]?.uri;
+
+    if (imageUri) {
+      handleUploadImage(imageUri); // Call only if imageUri is a valid string
+    } else {
+      Alert.alert('Error', 'No image selected.');
     }
   };
 
-  const handleSave = () => {
-    navigation.goBack();
+  const handleUploadImage = async (imageUri: string) => {
+    setIsUploading(true);
+    try {
+      const response = await uploadImage({imageUri});
+      if (response?.success) {
+        setImageUri(response.url);
+        setUploadedImageUrl(response.url); // Store the uploaded image URL
+      } else {
+        Alert.alert('Error', response?.message || 'Image upload failed.');
+      }
+    } catch (error) {
+      Alert.alert('Error', 'An error occurred while uploading the image.');
+    } finally {
+      setIsUploading(false);
+    }
   };
+
+  const handleSave = async () => {
+    if (isUploading) {
+      return;
+    }
+    // Validate input fields
+    if (!makeNew || !modelNew || !yearNew || !imageUri) {
+      Alert.alert(
+        'Validation Error',
+        'Please fill all required fields, including uploading an image.',
+      );
+      return;
+    }
+
+    setLoader(true); // Start loader
+    try {
+      // Prepare the body for the API call
+      const body: EditVehicleBody = {
+        image: imageUri, // from image picker
+        make: makeNew, // from form input
+        model: modelNew, // from form input
+        year: Number(yearNew), // Convert year to number if it's a string
+        transmission: transmissionNew, // from form input
+      };
+
+      console.log(body);
+      // Call the signup API
+      const carId = vehicleData?.id;
+      console.log('cardIddddddddddddd', carId);
+
+      const response = await editVehicle(body, authToken, carId);
+      console.log('Edit Vehicle Response:', response);
+      if (response?.success) {
+        dispatch(setUserData(response?.userData));
+        Alert.alert('Success', 'Your vehicle is updated successfully!', [
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.goBack();
+            },
+          },
+        ]);
+      } else {
+        Alert.alert(
+          'Error',
+          response?.message ||
+            'Your vehicle could not be updated, try again later!',
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                navigation.goBack();
+              },
+            },
+          ],
+        );
+      }
+    } catch (error) {
+      Alert.alert('Error', 'An error occurred while updating your vehicle.', [
+        {
+          text: 'OK',
+          onPress: () => {
+            navigation.goBack();
+          },
+        },
+      ]);
+      console.error('Error:', error);
+    } finally {
+      setLoader(false); // Stop loader
+    }
+  };
+
+  // const handleSave = () => {
+  //   navigation.goBack();
+  // };
 
   return (
     <SafeAreaView>
@@ -128,27 +240,29 @@ const EditVehicle: React.FC = (): JSX.Element => {
                         {text: 'Cancel', style: 'cancel'},
                       ])
                     }>
-                    {imageUri ? (
-                      typeof imageUri === 'string' ? (
-                        <Image
-                          style={styles.uploadImgPreview}
-                          source={{uri: imageUri}}
-                        />
-                      ) : (
-                        <Image
-                          style={styles.uploadImgPreview}
-                          source={imageUri}
-                        />
-                      )
+                    {isUploading ? (
+                      <ActivityIndicator
+                        color={colors.disabledText}
+                        size={40}
+                      />
                     ) : (
                       <>
-                        <Image
-                          style={styles.uploadImgIcon}
-                          source={images.uploadImgIcon}
-                        />
-                        <Text style={styles.uploadImgText}>
-                          Upload Vehicle Image
-                        </Text>
+                        {imageUri ? (
+                          <Image
+                            style={styles.uploadImgPreview}
+                            source={{uri: imageUri}}
+                          />
+                        ) : (
+                          <>
+                            <Image
+                              style={styles.uploadImgIcon}
+                              source={images.uploadImgIcon}
+                            />
+                            <Text style={styles.uploadImgText}>
+                              Upload Vehicle Image
+                            </Text>
+                          </>
+                        )}
                       </>
                     )}
                   </TouchableOpacity>
@@ -181,12 +295,12 @@ const EditVehicle: React.FC = (): JSX.Element => {
                 <View style={styles.inputContainer}>
                   <TextInput
                     onChangeText={text => {
-                      setYearNew(text);
+                      setYearNew(Number(text));
                     }}
                     style={styles.input}
                     placeholder="Year"
                     placeholderTextColor={colors.disabledText}
-                    value={yearNew}
+                    value={yearNew.toString()}
                   />
                 </View>
 
@@ -233,7 +347,11 @@ const EditVehicle: React.FC = (): JSX.Element => {
             </View>
 
             <Text style={styles.errMsg}>{errMsg}</Text>
-            <OrangeButton title="Save Vehicle" onPress={handleSave} />
+            {loader ? (
+              <OrangeButtonLoader />
+            ) : (
+              <OrangeButton title="Save Vehicle" onPress={handleSave} />
+            )}
           </View>
         </View>
       </View>
