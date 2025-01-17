@@ -149,6 +149,16 @@ const EditVehicle: React.FC = (): JSX.Element => {
     if (isUploading) {
       return;
     }
+
+    if (
+      makeNew === vehicleData?.make &&
+      modelNew === vehicleData?.model &&
+      yearNew === vehicleData?.year &&
+      imageUri === vehicleData?.image
+    ) {
+      navigation.goBack();
+      return;
+    }
     // Validate input fields
     if (!makeNew || !modelNew || !yearNew || !imageUri) {
       Alert.alert(

@@ -4,10 +4,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage'; // Correct
 import {combineReducers} from '@reduxjs/toolkit';
 import authSlice from './authSlice';
 import userSlice from './userSlice';
+import reviewsSlice from './reviewSlice';
 
 const rootReducer = combineReducers({
   auth: authSlice,
   user: userSlice,
+  reviews: reviewsSlice,
 });
 
 const persistConfig = {

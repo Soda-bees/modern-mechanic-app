@@ -26,7 +26,10 @@ import {
 import {verifyOtp, VerifyOtpBody} from '../../services/config/API';
 import OrangeButtonLoader from '../../components/OrangeButtonLoader';
 
-type NavigationProp = StackNavigationProp<RootStackParamList, 'ResetPassword'>;
+type NavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'ResetPassword' | 'Login'
+>;
 type RouteProps = RouteProp<RootStackParamList, 'Otp'>;
 
 const Otp: React.FC = (): JSX.Element => {
@@ -70,6 +73,12 @@ const Otp: React.FC = (): JSX.Element => {
         Alert.alert(
           'Error',
           response?.message || 'Something went wrong. Please try again later.',
+          [
+            {
+              text: 'OK',
+              onPress: () => navigation.navigate('Login'),
+            },
+          ],
         );
       }
     } catch (error) {

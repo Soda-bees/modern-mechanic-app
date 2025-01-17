@@ -57,10 +57,9 @@ const Profile: React.FC = (): JSX.Element => {
     // Clear the authToken and userData in Redux
     dispatch(removeAuthToken());
     dispatch(removeUserData());
-
-    // Optionally, navigate to the login or landing screen
-    // navigation.replace('Login'); // Uncomment if using navigation
   };
+
+  const handleEditPrivacyPolicy = () => {};
 
   return (
     <SafeAreaView>
@@ -90,7 +89,7 @@ const Profile: React.FC = (): JSX.Element => {
 
           <TouchableOpacity
             style={styles.navigateBtn}
-            onPress={handleEditProfile}>
+            onPress={handleEditPrivacyPolicy}>
             <Text style={styles.navigateBtnText}>Privacy Policy</Text>
             <Image style={styles.rightIcon} source={images.rightIcon} />
           </TouchableOpacity>

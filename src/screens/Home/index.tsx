@@ -19,9 +19,10 @@ import AndroidOpenSettings from 'react-native-android-open-settings';
 import {requestPermissions} from '../../services/config/BLEManager/BLEManager';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectUserData, setUserData} from '../../store/userSlice';
-import {getUserDetails} from '../../services/config/API';
+import {getAllReviews, getUserDetails} from '../../services/config/API';
 import {AppDispatch} from '../../store';
 import {selectAuthToken} from '../../store/authSlice';
+import {selectAllReviews, setAllReviews} from '../../store/reviewSlice';
 
 type NavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -33,7 +34,8 @@ const Home: React.FC = (): JSX.Element => {
   const dispatch: AppDispatch = useDispatch();
   const userData = useSelector(selectUserData);
   const authToken = useSelector(selectAuthToken);
-  console.log(userData);
+  const allReviews = useSelector(selectAllReviews);
+  console.log('Home Logggggggggggggg', userData, authToken, allReviews);
 
   const [email, setEmail] = useState<string>('');
   const [errMsg, setErrMsg] = useState<string>('');
@@ -49,7 +51,7 @@ const Home: React.FC = (): JSX.Element => {
     if (!authToken) return;
     try {
       const response = await getUserDetails(authToken); // Call checkEmail API
-      console.log('Response:', response);
+      console.log('Response: userData', response);
       if (response?.success) {
         dispatch(setUserData(response.userData));
       }
@@ -58,8 +60,22 @@ const Home: React.FC = (): JSX.Element => {
     }
   };
 
+  const handleGetAllReviews = async () => {
+    if (!authToken) return;
+    try {
+      const response = await getAllReviews(authToken); // Call checkEmail API
+      console.log('Response: allReviews', response);
+      if (response?.success) {
+        dispatch(setAllReviews(response?.reviews));
+      }
+    } catch (error) {
+      console.error('Error in retrieving all reviews:', error);
+    }
+  };
+
   useEffect(() => {
     handleGetUserDetails();
+    handleGetAllReviews();
   }, []);
 
   const handleRequestPermission = async () => {

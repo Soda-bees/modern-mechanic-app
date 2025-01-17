@@ -21,10 +21,10 @@ const ForgotPassword: React.FC = (): JSX.Element => {
   const [loader, setLoader] = useState<boolean>(false);
 
   const handleSend = async () => {
-    if (!email) {
-      Alert.alert('Error', 'Please enter your email to continue.');
-      return;
-    }
+    // if (!email) {
+    //   Alert.alert('Error', 'Please enter your email to continue.');
+    //   return;
+    // }
     setLoader(true);
 
     try {

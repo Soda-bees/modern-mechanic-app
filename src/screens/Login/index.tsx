@@ -56,9 +56,10 @@ const Login: React.FC = (): JSX.Element => {
       };
 
       const response = await LogIn(body);
-      console.log(response);
+      console.log('login response', response);
+      console.log('login response error message', response?.message);
 
-      if (response?.success) {
+      if (response?.success && response?.token && response?.userData) {
         setLoader(false);
         dispatch(setUserData(response?.userData));
         dispatch(setAuthToken(response?.token));

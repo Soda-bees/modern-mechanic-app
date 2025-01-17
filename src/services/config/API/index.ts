@@ -1,7 +1,24 @@
-import {useSelector} from 'react-redux';
 import {axiosInstance} from '../Axiosinstance';
-import axios from 'axios';
-import {selectAuthToken} from '../../../store/authSlice';
+
+const API_ENDPOINTS = {
+  checkEmail: '/auth/check_email',
+  uploadImage: '/user/upload_image',
+  signup: '/auth/signup',
+  login: '/auth/login',
+  getUserDetails: '/user/get_user_details',
+  changePassword: '/user/change_password',
+  updateUserData: '/user/update_user_data',
+  sendOtp: '/auth/send_otp',
+  verifyOtp: '/auth/verify_otp',
+  resetPassword: '/auth/reset_password',
+  addVehicle: '/user/add_vehicle',
+  editVehicle: '/user/edit_vehicle',
+  removeVehicle: '/user/remove_vehicle',
+  getAllReviews: '/user/get_all_reviews',
+  addReview: '/user/add_review',
+  editReview: '/user/edit_review',
+  deleteReview: '/user/delete_review',
+};
 
 type CheckEmailResponse = {
   message: string;
@@ -15,23 +32,19 @@ type CheckEmailBody = {
 
 export const checkEmail = async (
   body: CheckEmailBody,
-): Promise<CheckEmailResponse | undefined> => {
+): Promise<CheckEmailResponse> => {
   try {
-    const headers = {
-      'Content-Type': 'application/json',
-    };
     const response = await axiosInstance.post<CheckEmailResponse>(
-      'auth/check_email',
+      API_ENDPOINTS.checkEmail,
       body,
-      {headers},
+      {
+        validateStatus: status => status >= 200 && status < 500,
+      },
     );
-    return response.data; // Return the response data
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data; // Return error data if available
-    }
-    console.error('Error checking email:', error); // Log any other errors
-    return undefined; // Return undefined for unknown errors
+    return response.data;
+  } catch (error: any) {
+    console.error('checkEmail API error:', error.message || error);
+    return {success: false, message: error.message || 'Unknown error'};
   }
 };
 
@@ -45,35 +58,33 @@ type UploadImageResponse = {
 interface UploadImageBody {
   imageUri: string | undefined; // or just 'string' if it's always required
 }
+
 export const uploadImage = async (
   body: UploadImageBody,
-): Promise<UploadImageResponse | undefined> => {
+): Promise<UploadImageResponse | null> => {
   try {
     const formData = new FormData();
-    // Add the actual file to the formData
+    const fileName = body.imageUri?.split('/').pop(); // Dynamically extract file name
     formData.append('imageUri', {
-      uri: body.imageUri, // The file URI
-      name: 'uploaded_image.jpg', // A default file name
-      type: 'image/jpeg', // File type
+      uri: body.imageUri,
+      name: fileName || 'uploaded_image.jpg', // Default to 'uploaded_image.jpg' if undefined
+      type: 'image/jpeg',
     });
 
     const headers = {
-      'Content-Type': 'multipart/form-data', // Specify multipart for file upload
+      'Content-Type': 'multipart/form-data',
     };
 
     const response = await axiosInstance.post<UploadImageResponse>(
-      'user/upload_image', // Endpoint for image upload
+      API_ENDPOINTS.uploadImage,
       formData,
-      {headers},
+      {headers, validateStatus: status => status >= 200 && status < 500},
     );
 
-    return response.data; // Return the response data
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data; // Return error data if available
-    }
-    console.error('Error uploading image:', error); // Log any other errors
-    return undefined; // Return undefined for unknown errors
+    return response.data;
+  } catch (error: any) {
+    console.error('UploadImage API error:', error.message || error);
+    return {success: false, message: error.message || 'Unknown error'};
   }
 };
 
@@ -107,17 +118,14 @@ export const signUp = async (
       'Content-Type': 'application/json',
     };
     const response = await axiosInstance.post<SignupResponse>(
-      'auth/signup',
+      API_ENDPOINTS.signup,
       body,
-      {headers},
+      {headers, validateStatus: status => status >= 200 && status < 500},
     );
     return response.data; // Return the response data
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data; // Return error data if available
-    }
-    console.error('Error during signup:', error); // Log any other errors
-    return undefined; // Return undefined for unknown errors
+  } catch (error: any) {
+    console.error('SignUp API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
   }
 };
 
@@ -138,18 +146,16 @@ export const getUserDetails = async (
     };
 
     const response = await axiosInstance.get<GetUserDataResponse>(
-      '/user/get_user_details',
+      API_ENDPOINTS.getUserDetails,
       {
         headers,
+        validateStatus: status => status >= 200 && status < 500,
       },
     );
     return response.data; // Return the response data
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data; // Return error data if available
-    }
-    console.error('Error retrieving user details:', error); // Log any other errors
-    return undefined; // Return undefined for unknown errors
+  } catch (error: any) {
+    console.error('GetUserDetails API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
   }
 };
 
@@ -175,19 +181,17 @@ export const changePassword = async (
     };
 
     const response = await axiosInstance.post<ChangePasswordResponse>(
-      '/user/change_password',
+      API_ENDPOINTS.changePassword,
       body,
       {
         headers,
+        validateStatus: status => status >= 200 && status < 500,
       },
     );
     return response.data; // Return the response data
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data; // Return error data if available
-    }
-    console.error('Error retrieving user details:', error); // Log any other errors
-    return undefined; // Return undefined for unknown errors
+  } catch (error: any) {
+    console.error('ChangePassword API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
   }
 };
 
@@ -199,33 +203,25 @@ export type LoginBody = {
 export type LoginResponse = {
   message: string;
   success: boolean;
-  token: string;
-  userData: any;
+  token?: string;
+  userData?: any;
   error?: any;
 };
 
-export const LogIn = async (
-  body: LoginBody,
-): Promise<LoginResponse | undefined> => {
+export const LogIn = async (body: LoginBody): Promise<LoginResponse> => {
   try {
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-
     const response = await axiosInstance.post<LoginResponse>(
-      '/auth/login',
+      API_ENDPOINTS.login,
       body,
       {
-        headers,
+        validateStatus: status => status >= 200 && status < 500,
       },
     );
-    return response.data; // Return the response data
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data; // Return error data if available
-    }
-    console.error('Error retrieving user details:', error); // Log any other errors
-    return undefined; // Return undefined for unknown errors
+
+    return response.data;
+  } catch (error: any) {
+    console.error('LogIn API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
   }
 };
 
@@ -252,19 +248,17 @@ export const updateUserData = async (
     };
 
     const response = await axiosInstance.post<UpdateUserDataResponse>(
-      '/user/update_user_data',
+      API_ENDPOINTS.updateUserData,
       body,
       {
         headers,
+        validateStatus: status => status >= 200 && status < 500,
       },
     );
     return response.data; // Return the response data
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data; // Return error data if available
-    }
-    console.error('Error retrieving user details:', error); // Log any other errors
-    return undefined; // Return undefined for unknown errors
+  } catch (error: any) {
+    console.error('UpdateUserData API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
   }
 };
 
@@ -288,19 +282,17 @@ export const sendOtp = async (
     };
 
     const response = await axiosInstance.post<SendOtpResponse>(
-      '/auth/send_otp',
+      API_ENDPOINTS.sendOtp,
       body,
       {
         headers,
+        validateStatus: status => status >= 200 && status < 500,
       },
     );
     return response.data; // Return the response data
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data; // Return error data if available
-    }
-    console.error('Error retrieving user details:', error); // Log any other errors
-    return undefined; // Return undefined for unknown errors
+  } catch (error: any) {
+    console.error('SendOtp API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
   }
 };
 
@@ -324,19 +316,17 @@ export const verifyOtp = async (
     };
 
     const response = await axiosInstance.post<VerifyOtpResponse>(
-      '/auth/verify_otp',
+      API_ENDPOINTS.verifyOtp,
       body,
       {
         headers,
+        validateStatus: status => status >= 200 && status < 500,
       },
     );
     return response.data; // Return the response data
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data; // Return error data if available
-    }
-    console.error('Error retrieving user details:', error); // Log any other errors
-    return undefined; // Return undefined for unknown errors
+  } catch (error: any) {
+    console.error('VerifyOtp API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
   }
 };
 
@@ -361,19 +351,17 @@ export const resetPassword = async (
     };
 
     const response = await axiosInstance.post<ResetPasswordResponse>(
-      '/auth/reset_password',
+      API_ENDPOINTS.resetPassword,
       body,
       {
         headers,
+        validateStatus: status => status >= 200 && status < 500,
       },
     );
     return response.data; // Return the response data
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data; // Return error data if available
-    }
-    console.error('Error retrieving user details:', error); // Log any other errors
-    return undefined; // Return undefined for unknown errors
+  } catch (error: any) {
+    console.error('ResetPassword API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
   }
 };
 
@@ -394,8 +382,8 @@ export type AddVehicleResponse = {
 
 export const addVehicle = async (
   body: AddVehicleBody,
-  authToken: String | null,
-): Promise<AddVehicleResponse | undefined> => {
+  authToken: string | null,
+): Promise<AddVehicleResponse> => {
   try {
     const headers = {
       'Content-Type': 'application/json',
@@ -403,19 +391,18 @@ export const addVehicle = async (
     };
 
     const response = await axiosInstance.post<AddVehicleResponse>(
-      '/user/add_vehicle',
+      API_ENDPOINTS.addVehicle,
       body,
       {
         headers,
+        validateStatus: status => status >= 200 && status < 500,
       },
     );
-    return response.data; // Return the response data
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data; // Return error data if available
-    }
-    console.error('Error retrieving user details:', error); // Log any other errors
-    return undefined; // Return undefined for unknown errors
+
+    return response.data;
+  } catch (error: any) {
+    console.error('AddVehicle API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
   }
 };
 
@@ -446,19 +433,17 @@ export const editVehicle = async (
     };
 
     const response = await axiosInstance.post<EditVehicleResponse>(
-      `/user/edit_vehicle/${carId}`,
+      `${API_ENDPOINTS.editVehicle}/${carId}`,
       body,
       {
         headers,
+        validateStatus: status => status >= 200 && status < 500,
       },
     );
     return response.data; // Return the response data
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data; // Return error data if available
-    }
-    console.error('Error retrieving user details:', error); // Log any other errors
-    return undefined; // Return undefined for unknown errors
+  } catch (error: any) {
+    console.error('EditVehicle API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
   }
 };
 
@@ -480,17 +465,152 @@ export const removeVehicle = async (
     };
 
     const response = await axiosInstance.delete<RemoveVehicleResponse>(
-      `/user/remove_vehicle/${carId}`,
+      `${API_ENDPOINTS.removeVehicle}/${carId}`,
       {
         headers,
+        validateStatus: status => status >= 200 && status < 500,
       },
     );
     return response.data; // Return the response data
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response) {
-      return error.response.data; // Return error data if available
-    }
-    console.error('Error retrieving user details:', error); // Log any other errors
-    return undefined; // Return undefined for unknown errors
+  } catch (error: any) {
+    console.error('RemoveVehicle API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
   }
 };
+
+export type GetAllReviewsResponse = {
+  message: string;
+  reviews: any;
+  success: boolean;
+  error?: any;
+};
+
+export const getAllReviews = async (
+  authToken: String | null,
+): Promise<GetAllReviewsResponse | undefined> => {
+  try {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    };
+
+    const response = await axiosInstance.get<GetAllReviewsResponse>(
+      API_ENDPOINTS.getAllReviews,
+      {
+        headers,
+        validateStatus: status => status >= 200 && status < 500,
+      },
+    );
+    return response.data; // Return the response data
+  } catch (error: any) {
+    console.error('GetAllReviews API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
+  }
+};
+
+export type AddReviewBody = {
+  reviewerName: string;
+  reviewText: string;
+  rating: number;
+};
+
+export type AddReviewResponse = {
+  message: string;
+  userData: any;
+  review: any;
+  success: boolean;
+  error?: any;
+};
+
+export const addReview = async (
+  body: AddReviewBody,
+  authToken: String | null,
+): Promise<AddReviewResponse | undefined> => {
+  try {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    };
+
+    const response = await axiosInstance.post<AddReviewResponse>(
+      API_ENDPOINTS.addReview,
+      body,
+      {
+        headers,
+        validateStatus: status => status >= 200 && status < 500,
+      },
+    );
+    return response.data; // Return the response data
+  } catch (error: any) {
+    console.error('AddReview API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
+  }
+};
+
+export type EditReviewBody = {
+  reviewText: string;
+  rating: number;
+};
+
+export type EditReviewResponse = {
+  message: string;
+  userData: any;
+  review: any;
+  success: boolean;
+  error?: any;
+};
+
+export const editReview = async (
+  body: EditReviewBody,
+  authToken: String | null,
+): Promise<EditReviewResponse | undefined> => {
+  try {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    };
+
+    const response = await axiosInstance.post<EditReviewResponse>(
+      API_ENDPOINTS.editReview,
+      body,
+      {
+        headers,
+        validateStatus: status => status >= 200 && status < 500,
+      },
+    );
+    return response.data; // Return the response data
+  } catch (error: any) {
+    console.error('EditReview API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
+  }
+};
+
+export type DeleteReviewResponse = {
+  message: string;
+  userData: any;
+  success: boolean;
+  error?: any;
+};
+
+// export const deleteReview = async (
+//   authToken: String | null,
+// ): Promise<DeleteReviewResponse | undefined> => {
+//   try {
+//     const headers = {
+//       'Content-Type': 'application/json',
+//       Authorization: `Bearer ${authToken}`,
+//     };
+
+//     const response = await axiosInstance.post<DeleteReviewResponse>(
+//       API_ENDPOINTS.deleteReview,
+//       {
+//         headers,
+//         validateStatus: status => status >= 200 && status < 500,
+//       },
+//     );
+//     return response.data; // Return the response data
+//   } catch (error: any) {
+//     console.error('DeleteReview API error:', error.message || error);
+//     throw {success: false, message: error.message || 'Unknown error'};
+//   }
+// };

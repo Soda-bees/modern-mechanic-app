@@ -157,6 +157,8 @@ const ResetPassword: React.FC = (): JSX.Element => {
             </TouchableOpacity>
           </View>
           <View style={styles.orangeButtonContainer}>
+            <Text style={styles.errMsg}>{errorMsg}</Text>
+
             {loader ? (
               <OrangeButtonLoader />
             ) : (

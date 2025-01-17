@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Alert,
 } from 'react-native';
 import styles from './style';
 import images from '../../services/utilities/images';
@@ -18,44 +19,165 @@ import Modal from 'react-native-modal';
 import StarRating, {StarRatingDisplay} from 'react-native-star-rating-widget';
 import {colors, sizes} from '../../services/utilities';
 import OrangeButton from '../../components/OrangeButton';
+import {selectUserData, setUserData} from '../../store/userSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {selectAuthToken} from '../../store/authSlice';
+import {
+  addReview,
+  AddReviewBody,
+  editReview,
+  EditReviewBody,
+} from '../../services/config/API';
+import {AppDispatch} from '../../store';
+import {addReviewRedux, editReviewRedux} from '../../store/reviewSlice';
+import OrangeButtonLoader from '../../components/OrangeButtonLoader';
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Scann'>;
 
 const Review: React.FC = (): JSX.Element => {
   const navigation = useNavigation<NavigationProp>();
+  const userData = useSelector(selectUserData);
+  const authToken = useSelector(selectAuthToken);
+  const dispatch: AppDispatch = useDispatch();
 
-  const [email, setEmail] = useState<string>('');
-  const [errMsg, setErrMsg] = useState<string>('');
-  const [rating, setRating] = useState<number>(0);
-  const [comment, setComment] = useState<string>('');
+  const [loader, setLoader] = useState<Boolean>(false);
+  const [rating, setRating] = useState<number>(
+    userData?.review ? userData?.review.rating : 0,
+  );
+  const [comment, setComment] = useState<string>(
+    userData?.review ? userData?.review.reviewText : '',
+  );
 
-  type DashLight = {
-    name: string;
-    rating: any;
-    comment: string;
+  const handleEditReview = async () => {
+    try {
+      setLoader(true);
+      if (!rating || !comment) {
+        Alert.alert('Please provide a rating and comment.');
+        return;
+      }
+
+      if (
+        rating === userData?.review?.rating &&
+        comment === userData?.review?.reviewText
+      ) {
+        navigation.goBack();
+        return;
+      }
+
+      const body: EditReviewBody = {
+        reviewText: comment,
+        rating,
+      };
+      const response = await editReview(body, authToken);
+
+      if (response?.success) {
+        setLoader(false);
+
+        dispatch(setUserData(response?.userData));
+        dispatch(editReviewRedux(response?.review));
+        Alert.alert('Success', 'Review updated successfully!', [
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.goBack();
+            },
+          },
+        ]);
+      } else {
+        setLoader(false);
+
+        Alert.alert(
+          'Success',
+          response?.message || 'Failed to update review.',
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                navigation.goBack();
+              },
+            },
+          ],
+        );
+      }
+    } catch (error) {
+      setLoader(false);
+
+      console.error('Error updating review:', error);
+      Alert.alert('Error', 'An error occurred while updating the review.', [
+        {
+          text: 'OK',
+          onPress: () => {
+            navigation.goBack();
+          },
+        },
+      ]);
+    }
   };
 
-  const [feedbacks, setFeedbacks] = useState<DashLight[]>([
-    {
-      name: 'John D',
-      rating: 4,
-      comment:
-        'This app saved me time and money by diagnosing my car’s problem quickly. A must-have for car owners!',
-    },
-    {
-      name: 'Sarah K',
-      rating: 5,
-      comment:
-        'Great tool for car diagnostics. The real-time tracking is impressive, though more detailed guides would be helpful',
-    },
-    {
-      name: 'Mark K',
-      rating: 4,
-      comment:
-        'Seamless experience! The app identified the issue and directed me to the nearest repair shop. Highly recommend!',
-    },
-  ]);
+  const handleAddReview = async () => {
+    try {
+      setLoader(true);
 
-  const handleSubmit = () => {};
+      if (!userData?.name || !comment || !rating) {
+        Alert.alert('Validation Error', 'Please provide all required fields.');
+        return;
+      }
+
+      const body: AddReviewBody = {
+        reviewerName: userData?.name,
+        reviewText: comment,
+        rating,
+      };
+
+      const response = await addReview(body, authToken);
+
+      if (response?.success) {
+        setLoader(false);
+
+        dispatch(setUserData(response?.userData));
+        dispatch(addReviewRedux(response?.review));
+
+        Alert.alert('Success', 'Review added successfully!', [
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.goBack();
+            },
+          },
+        ]);
+      } else {
+        setLoader(false);
+
+        Alert.alert(
+          'Error',
+          response?.message || 'Failed to add review. Please try again later.',
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                navigation.goBack();
+              },
+            },
+          ],
+        );
+      }
+    } catch (error) {
+      console.error('Error while adding review:', error);
+      setLoader(false);
+
+      Alert.alert(
+        'Error',
+        'An unexpected error occurred. Please try again later.',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.goBack();
+            },
+          },
+        ],
+      );
+    }
+  };
 
   return (
     <SafeAreaView>
@@ -114,7 +236,16 @@ const Review: React.FC = (): JSX.Element => {
               style={{marginTop: sizes.screenHeight * 0.01}}
             />
             <View style={styles.bottomBtnContainer}>
-              <OrangeButton title="Submit" onPress={handleSubmit} />
+              {loader ? (
+                <OrangeButtonLoader />
+              ) : (
+                <OrangeButton
+                  title="Submit"
+                  onPress={() => {
+                    userData?.review ? handleEditReview() : handleAddReview();
+                  }}
+                />
+              )}
             </View>
           </View>
         </View>

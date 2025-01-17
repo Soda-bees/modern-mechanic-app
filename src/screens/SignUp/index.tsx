@@ -6,6 +6,9 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  KeyboardAvoidingView,
+  ScrollView,
+  Platform,
 } from 'react-native';
 import styles from './style';
 import images from '../../services/utilities/images';
@@ -32,8 +35,38 @@ const SignUp: React.FC = (): JSX.Element => {
 
   const handleSignUp = async () => {
     try {
-      setIsLoading(true); // Show loader
+      setIsLoading(true);
       console.log('Running handleSignUp');
+
+      // Validate input fields
+      if (!name || !email || !zipCode || !password) {
+        setErrMsg('All fields are required.');
+        setIsLoading(false);
+        return;
+      }
+
+      // Validate email format using regular expression
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (!emailRegex.test(email)) {
+        setErrMsg('Please enter a valid email address.');
+        setIsLoading(false);
+        return;
+      }
+
+      // Validate password length
+      if (password.length < 8) {
+        setErrMsg('Password must be at least 8 characters long.');
+        setIsLoading(false);
+        return;
+      }
+
+      if (name.trim().length < 3) {
+        setErrMsg(
+          'Name must be at least 3 characters long and cannot be just spaces.',
+        );
+        setIsLoading(false);
+        return;
+      }
 
       const response = await checkEmail({email}); // Call checkEmail API
       console.log('Response:', response);
@@ -65,112 +98,124 @@ const SignUp: React.FC = (): JSX.Element => {
   };
 
   return (
-    <SafeAreaView>
-      <View>
-        <Image source={images.bg} style={styles.bg} />
+    <SafeAreaView style={{flex: 1}}>
+      <KeyboardAvoidingView
+        style={{flex: 1}}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+        <ScrollView
+          contentContainerStyle={{flexGrow: 1}}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}>
+          <View>
+            <Image source={images.bg} style={styles.bg} />
 
-        <View style={styles.sectionContainer}>
-          <Text style={styles.textLargeBold}>Create an account</Text>
-          <Text style={styles.disabledText}>
-            Welcome! Please enter your details.
-          </Text>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.textLargeBold}>Create an account</Text>
+              <Text style={styles.disabledText}>
+                Welcome! Please enter your details.
+              </Text>
 
-          <Text
-            style={[styles.inputLabel, {marginTop: sizes.screenHeight * 0.03}]}>
-            Name
-          </Text>
-          <View style={styles.inputContainer}>
-            <Image style={styles.inputIcon} source={images.nameIcon} />
-            <TextInput
-              onChangeText={text => {
-                setName(text);
-              }}
-              style={styles.input}
-              placeholder="Enter your name"
-              placeholderTextColor={colors.disabledText}
-            />
+              <Text
+                style={[
+                  styles.inputLabel,
+                  {marginTop: sizes.screenHeight * 0.03},
+                ]}>
+                Name
+              </Text>
+              <View style={styles.inputContainer}>
+                <Image style={styles.inputIcon} source={images.nameIcon} />
+                <TextInput
+                  onChangeText={text => {
+                    setName(text);
+                  }}
+                  style={styles.input}
+                  placeholder="Enter your name"
+                  placeholderTextColor={colors.disabledText}
+                />
+              </View>
+
+              <Text style={styles.inputLabel}>Email</Text>
+              <View style={styles.inputContainer}>
+                <Image style={styles.inputIcon} source={images.emailIcon} />
+                <TextInput
+                  onChangeText={text => {
+                    setEmail(text);
+                  }}
+                  style={styles.input}
+                  placeholder="Enter your email"
+                  placeholderTextColor={colors.disabledText}
+                />
+              </View>
+
+              <Text style={styles.inputLabel}>Zip Code</Text>
+              <View style={styles.inputContainer}>
+                <Image style={styles.inputIcon} source={images.zipCodeIcon} />
+                <TextInput
+                  onChangeText={text => {
+                    setZipCode(Number(text));
+                  }}
+                  style={styles.input}
+                  placeholder="Enter your Zip Code"
+                  placeholderTextColor={colors.disabledText}
+                  inputMode="numeric"
+                />
+              </View>
+
+              <Text style={styles.inputLabel}>Password</Text>
+              <View style={styles.inputContainer}>
+                <Image style={styles.inputIcon} source={images.passwordIcon} />
+                <TextInput
+                  onChangeText={text => {
+                    setPassword(text);
+                  }}
+                  style={styles.input}
+                  placeholder="Enter your password"
+                  placeholderTextColor={colors.disabledText}
+                  secureTextEntry={secure}
+                />
+                <TouchableOpacity
+                  onPress={() => {
+                    setSecure(!secure);
+                  }}
+                  style={styles.showHideContainer}>
+                  <Image
+                    style={styles.inputIcon}
+                    source={secure ? images.hide : images.show}
+                  />
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.tickRow}>
+                <Image
+                  source={password.length >= 8 ? images.tick : images.untick}
+                  style={styles.tick}
+                />
+                <Text style={styles.disabledText}>
+                  Must be at least 8 characters.
+                </Text>
+              </View>
+
+              <Text style={styles.errMsg}>{errMsg}</Text>
+              {isLoading ? (
+                <OrangeButtonLoader />
+              ) : (
+                <OrangeButton title="Sign Up" onPress={handleSignUp} />
+              )}
+
+              <View style={styles.hrContainer}>
+                <View style={styles.hr}></View>
+                <Text style={styles.disabledText}>Continue with</Text>
+                <View style={styles.hr}></View>
+              </View>
+
+              <TouchableOpacity style={styles.loginWithBtn}>
+                <Image style={styles.inputIcon} source={images.googleIcon} />
+                <Text style={styles.loginWithBtnLabel}>Google</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-
-          <Text style={styles.inputLabel}>Email</Text>
-          <View style={styles.inputContainer}>
-            <Image style={styles.inputIcon} source={images.emailIcon} />
-            <TextInput
-              onChangeText={text => {
-                setEmail(text);
-              }}
-              style={styles.input}
-              placeholder="Enter your email"
-              placeholderTextColor={colors.disabledText}
-            />
-          </View>
-
-          <Text style={styles.inputLabel}>Zip Code</Text>
-          <View style={styles.inputContainer}>
-            <Image style={styles.inputIcon} source={images.zipCodeIcon} />
-            <TextInput
-              onChangeText={text => {
-                setZipCode(Number(text));
-              }}
-              style={styles.input}
-              placeholder="Enter your Zip Code"
-              placeholderTextColor={colors.disabledText}
-              inputMode="numeric"
-            />
-          </View>
-
-          <Text style={styles.inputLabel}>Password</Text>
-          <View style={styles.inputContainer}>
-            <Image style={styles.inputIcon} source={images.passwordIcon} />
-            <TextInput
-              onChangeText={text => {
-                setPassword(text);
-              }}
-              style={styles.input}
-              placeholder="Enter your password"
-              placeholderTextColor={colors.disabledText}
-              secureTextEntry={secure}
-            />
-            <TouchableOpacity
-              onPress={() => {
-                setSecure(!secure);
-              }}
-              style={styles.showHideContainer}>
-              <Image
-                style={styles.inputIcon}
-                source={secure ? images.hide : images.show}
-              />
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.tickRow}>
-            <Image
-              source={password.length >= 8 ? images.tick : images.untick}
-              style={styles.tick}
-            />
-            <Text style={styles.disabledText}>
-              Must be at least 8 characters.
-            </Text>
-          </View>
-
-          <Text style={styles.errMsg}>{errMsg}</Text>
-          {isLoading ? (
-            <OrangeButtonLoader />
-          ) : (
-            <OrangeButton title="Sign Up" onPress={handleSignUp} />
-          )}
-
-          <View style={styles.hrContainer}>
-            <View style={styles.hr}></View>
-            <Text style={styles.disabledText}>Continue with</Text>
-            <View style={styles.hr}></View>
-          </View>
-
-          <TouchableOpacity style={styles.loginWithBtn}>
-            <Image style={styles.inputIcon} source={images.googleIcon} />
-            <Text style={styles.loginWithBtnLabel}>Google</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };

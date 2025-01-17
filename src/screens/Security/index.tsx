@@ -72,7 +72,6 @@ const Security: React.FC = (): JSX.Element => {
 
       if (response?.success) {
         setErrorMsg('');
-
         Alert.alert('Success', 'Your password has been changed successfully!', [
           {
             text: 'OK',
@@ -82,7 +81,16 @@ const Security: React.FC = (): JSX.Element => {
           },
         ]);
       } else {
-        setErrorMsg(response?.message || 'Failed to change password.');
+        Alert.alert(
+          'Error',
+          response?.message ||
+            'Could not update your password, try again later!',
+          [
+            {
+              text: 'OK',
+            },
+          ],
+        );
       }
     } catch (error) {
       console.error('Error changing password:', error);

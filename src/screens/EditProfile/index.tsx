@@ -39,6 +39,11 @@ const EditProfile: React.FC = (): JSX.Element => {
   const [loader, setLoader] = useState<boolean>(false);
 
   const handleSave = async () => {
+    if (name === userData?.name && Number(zipCode) === userData?.zipCode) {
+      navigation.goBack();
+      return;
+    }
+
     setLoader(true);
 
     try {
