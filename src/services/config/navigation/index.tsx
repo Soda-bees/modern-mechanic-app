@@ -25,6 +25,8 @@ import {selectAuthToken} from '../../../store/authSlice';
 import Profile from '../../../screens/Profile';
 import EditProfile from '../../../screens/EditProfile';
 import Security from '../../../screens/Security';
+import ScanResultDemo from '../../../screens/ScanResultDemo';
+import {DTCResponse, ProcessDtcsResponse} from '../API';
 
 export type VehicleDataType = {
   make: string;
@@ -66,6 +68,7 @@ export type RootStackParamList = {
   Profile: any;
   EditProfile: any;
   Security: any;
+  ScanResultDemo: any;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -106,6 +109,7 @@ const MainNavigator: React.FC = (): JSX.Element => {
             <Stack.Screen name="Profile" component={Profile} />
             <Stack.Screen name="EditProfile" component={EditProfile} />
             <Stack.Screen name="Security" component={Security} />
+            <Stack.Screen name="ScanResultDemo" component={ScanResultDemo} />
           </>
         )}
       </Stack.Navigator>

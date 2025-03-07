@@ -18,6 +18,7 @@ const API_ENDPOINTS = {
   addReview: '/user/add_review',
   editReview: '/user/edit_review',
   deleteReview: '/user/delete_review',
+  processDtcs: '/user/process_dtc',
 };
 
 type CheckEmailResponse = {
@@ -572,6 +573,61 @@ export const editReview = async (
 
     const response = await axiosInstance.post<EditReviewResponse>(
       API_ENDPOINTS.editReview,
+      body,
+      {
+        headers,
+        validateStatus: status => status >= 200 && status < 500,
+      },
+    );
+    return response.data; // Return the response data
+  } catch (error: any) {
+    console.error('EditReview API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
+  }
+};
+
+export type DTCResponse = {
+  description: string;
+  analysis: string;
+  repair_instructions: string[];
+  urgency_level: string;
+  urgency_color: string;
+  urgency_explanation: string;
+  repair_difficulty: string;
+  difficulty_color: string;
+  difficulty_explanation: string;
+  cost_estimate: string;
+  required_parts: string[];
+  required_tools: string[];
+  youtube_videos: string[];
+  user_notes: string;
+  code: string;
+};
+
+export type ProcessDtcsBody = {
+  dtcs: string[];
+  userDescription: string;
+  vehicleInfo: string;
+};
+
+export type ProcessDtcsResponse = {
+  message: string;
+  data: DTCResponse[];
+  success: boolean;
+};
+
+export const processDtcs = async (
+  body: ProcessDtcsBody,
+  authToken: String | null,
+): Promise<ProcessDtcsResponse | undefined> => {
+  try {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    };
+
+    const response = await axiosInstance.post<ProcessDtcsResponse>(
+      API_ENDPOINTS.processDtcs,
       body,
       {
         headers,

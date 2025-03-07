@@ -5,11 +5,13 @@ import {combineReducers} from '@reduxjs/toolkit';
 import authSlice from './authSlice';
 import userSlice from './userSlice';
 import reviewsSlice from './reviewSlice';
+import dtcReportSlice from './dtcReportSlice';
 
 const rootReducer = combineReducers({
   auth: authSlice,
   user: userSlice,
   reviews: reviewsSlice,
+  dtcReport: dtcReportSlice,
 });
 
 const persistConfig = {

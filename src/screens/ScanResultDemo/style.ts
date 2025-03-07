@@ -150,16 +150,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
 
-  lowerBody: {
-    flex: 1,
-    backgroundColor: colors.bodyGrey,
-    borderTopRightRadius: 26,
-    borderTopLeftRadius: 26,
-    paddingTop: sizes.screenHeight * 0.02,
-    paddingHorizontal: sizes.screenWidth * 0.05,
-    justifyContent: 'space-between',
-  },
-
   backRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -213,12 +203,6 @@ const styles = StyleSheet.create({
     fontSize: fontSize.regular,
     color: colors.white,
     marginBottom: sizes.screenHeight * 0.03,
-  },
-
-  textWhiteSmall2: {
-    fontFamily: 'Medium',
-    fontSize: fontSize.regular,
-    color: colors.white,
   },
 
   gifContainer: {
@@ -292,12 +276,10 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: colors.disabledText,
+    flexDirection: 'column',
     marginVertical: 5,
     backgroundColor: colors.cardBackground,
     borderRadius: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
   },
 
   codeRow: {
@@ -337,15 +319,61 @@ const styles = StyleSheet.create({
     maxWidth: sizes.screenWidth * 0.75,
   },
 
-  orangeContainer2: {
-    backgroundColor: colors.appOrange,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 2,
-    paddingBottom: 5,
-    paddingHorizontal: sizes.screenWidth * 0.03,
-    marginLeft: sizes.screenWidth * 0.07,
-    borderRadius: sizes.screenHeight * 0.1,
+  lowerBody: {
+    flex: 1,
+    backgroundColor: colors.bodyGrey,
+    borderTopRightRadius: 26,
+    borderTopLeftRadius: 26,
+    paddingTop: sizes.screenHeight * 0.02,
+    paddingHorizontal: sizes.screenWidth * 0.05,
+  },
+
+  card: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    marginBottom: 10,
+    elevation: 10,
+  },
+
+  heading: {
+    fontFamily: 'Bold',
+    fontSize: fontSize.medium,
+    color: colors.black,
+  },
+
+  text: {
+    fontFamily: 'Regular',
+    fontSize: fontSize.smallM,
+    color: colors.black,
+  },
+
+  bold: {
+    fontFamily: 'Bold',
+  },
+
+  listItem: {
+    fontFamily: 'Regular',
+    fontSize: fontSize.smallM,
+    color: colors.black,
+  },
+
+  link: {
+    fontFamily: 'Medium',
+    color: 'blue',
+    textDecorationLine: 'underline',
+    marginTop: 5,
+  },
+
+  errorText: {
+    fontFamily: 'Medium',
+    fontSize: 16,
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 20,
   },
 });
 
