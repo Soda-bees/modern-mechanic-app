@@ -19,6 +19,7 @@ const API_ENDPOINTS = {
   editReview: '/user/edit_review',
   deleteReview: '/user/delete_review',
   processDtcs: '/user/process_dtc',
+  selectCar: '/user/select_car',
 };
 
 type CheckEmailResponse = {
@@ -646,6 +647,38 @@ export type DeleteReviewResponse = {
   userData: any;
   success: boolean;
   error?: any;
+};
+
+export type SelectCarResponse = {
+  message: string;
+  userData: any;
+  success: boolean;
+  error?: any;
+};
+
+export const selectCar = async (
+  authToken: String | null,
+  carId: number,
+): Promise<SelectCarResponse | undefined> => {
+  try {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    };
+
+    const response = await axiosInstance.post<SelectCarResponse>(
+      `${API_ENDPOINTS.selectCar}/${carId}`,
+      {},
+      {
+        headers,
+        validateStatus: (status: number) => status >= 200 && status < 500,
+      },
+    );
+    return response.data; // Return the response data
+  } catch (error: any) {
+    console.error('Select Car API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
+  }
 };
 
 // export const deleteReview = async (

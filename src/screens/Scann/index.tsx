@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -52,13 +52,6 @@ const Scann: React.FC = (): JSX.Element => {
   const userData = useSelector(selectUserData);
   const dtcReport = useSelector(selectDtcReport);
   const dispatch: AppDispatch = useDispatch();
-  const car = userData?.cars[0];
-
-  const [email, setEmail] = useState<string>('');
-  const [make, setMake] = useState<string>('Honda');
-  const [model, setModel] = useState<string>('Civic');
-  const [year, setYear] = useState<string>('2005');
-  const [imageUri, setImageUri] = useState<any>(images.carImg);
   const [index, setIndex] = useState<number>(0);
   const [notes, setNotes] = useState<string>('');
   const [devices, setDevices] = useState<Device[]>([]);
@@ -68,7 +61,9 @@ const Scann: React.FC = (): JSX.Element => {
   const [dtcs, setDtcs] = useState<string[]>([]);
   const [loader, setLoader] = useState<boolean>(false);
   const [connecting, setConnecting] = useState<boolean>(false);
-
+  const car = useMemo(() => {
+    return userData?.cars?.find(car => car.selected);
+  }, [userData]);
   const seenDevices = new Set<string>(); // To avoid duplicate devices
 
   // console.log('devices==============>>>>>>>>>>>>', devices);

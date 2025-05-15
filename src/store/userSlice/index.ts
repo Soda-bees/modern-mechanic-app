@@ -7,6 +7,7 @@ interface Car {
   model: string;
   year: number;
   transmission: string;
+  selected: boolean;
   id: number;
 }
 

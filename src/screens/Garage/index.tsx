@@ -22,7 +22,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectUserData, setUserData} from '../../store/userSlice';
 import {selectAuthToken} from '../../store/authSlice';
-import {removeVehicle} from '../../services/config/API';
+import {removeVehicle, selectCar} from '../../services/config/API';
 import {AppDispatch} from '../../store';
 
 type NavigationProp = StackNavigationProp<
@@ -35,15 +35,13 @@ const Garage: React.FC = (): JSX.Element => {
   const userData = useSelector(selectUserData);
   const authToken = useSelector(selectAuthToken);
   const dispatch: AppDispatch = useDispatch();
-
   const [errMsg, setErrMsg] = useState<string>('');
-  // const [make, setMake] = useState<string>('Honda');
-  // const [model, setModel] = useState<string>('Civic');
-  // const [year, setYear] = useState<string>('1998');
-  // const [transmission, setTransmission] = useState<string>('Automatic');
-  // const [imageUri, setImageUri] = useState<any>(images.carImg); // To store the image URI
   const [loader, setLoader] = useState<boolean>(false);
+  const [loader2, setLoader2] = useState<boolean>(false);
   const [deletingCarId, setDeletingCarId] = useState<number | null>(null);
+  const [selectingCarId, setSelectingCarId] = useState<number | null>(null);
+
+  console.log(userData?.cars);
 
   const handleGoToEdit = (
     image: string,
@@ -153,6 +151,79 @@ const Garage: React.FC = (): JSX.Element => {
     );
   };
 
+  const handleSelectCar = async (carId: number) => {
+    // Show confirmation alert
+    Alert.alert(
+      'Confirm Select',
+      'Are you sure you want to select this Car for the Scan?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel', // Different style for Cancel
+        },
+        {
+          text: 'Select',
+          style: 'destructive', // Red text to indicate a destructive action
+          onPress: async () => {
+            // Proceed with deletion
+            setSelectingCarId(carId);
+
+            setLoader2(true);
+            try {
+              console.log('Selecting Car with carId:', carId);
+
+              const response = await selectCar(authToken, carId);
+              console.log('Select Car Response:', response);
+
+              if (response?.success) {
+                setLoader2(false);
+                setSelectingCarId(null);
+                dispatch(setUserData(response?.userData));
+                Alert.alert('Success', 'Your Car is selected successfully!', [
+                  {
+                    text: 'OK',
+                  },
+                ]);
+              } else {
+                setLoader2(false);
+                setSelectingCarId(null);
+
+                Alert.alert(
+                  'Error',
+                  response?.message ||
+                    'Your Car could not be selected, try again later!',
+                  [
+                    {
+                      text: 'OK',
+                    },
+                  ],
+                );
+              }
+            } catch (error) {
+              setLoader2(false);
+              setSelectingCarId(null);
+
+              Alert.alert(
+                'Error',
+                'An error occurred while selecting your Car.',
+                [
+                  {
+                    text: 'OK',
+                  },
+                ],
+              );
+              console.error('Error:', error);
+            } finally {
+              setLoader2(false);
+              setSelectingCarId(null);
+            }
+          },
+        },
+      ],
+      {cancelable: true},
+    );
+  };
+
   return (
     <SafeAreaView>
       <View>
@@ -207,7 +278,30 @@ const Garage: React.FC = (): JSX.Element => {
                         <Text style={styles.textWhite2}>
                           {car?.make} {car?.model}
                         </Text>
-                        <Text style={styles.disabledText}>{car?.year}</Text>
+                        <View style={styles.selectRow}>
+                          <Text style={styles.disabledText}>{car?.year}</Text>
+                          <TouchableOpacity
+                            style={
+                              car.selected
+                                ? styles.setSelectedBtn
+                                : styles.setSelectBtn
+                            }
+                            onPress={() => {
+                              if (!loader2 && !car.selected) {
+                                handleSelectCar(car?.id);
+                              }
+                            }}>
+                            {loader2 ? (
+                              <View style={{bottom: 1}}>
+                                <ActivityIndicator size={20} color={'white'} />
+                              </View>
+                            ) : (
+                              <Text style={styles.textWhiteSmall}>
+                                {car.selected ? 'Selected' : 'Select'}
+                              </Text>
+                            )}
+                          </TouchableOpacity>
+                        </View>
                         <TouchableOpacity
                           style={styles.addVehicleBtn}
                           onPress={() => {

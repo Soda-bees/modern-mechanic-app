@@ -67,9 +67,43 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
 
+  selectRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 12,
+    marginTop: 8,
+  },
+
+  setSelectBtn: {
+    backgroundColor: '#ffffff33',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 24,
+    height: 24,
+    width: sizes.screenWidth * 0.17,
+  },
+
+  setSelectedBtn: {
+    backgroundColor: colors.appOrange,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 24,
+    height: 24,
+    width: sizes.screenWidth * 0.17,
+  },
+
   textWhite: {
     fontFamily: 'Medium',
     fontSize: fontSize.regular,
+    color: colors.white,
+    fontWeight: '500',
+    bottom: 2,
+  },
+
+  textWhiteSmall: {
+    fontFamily: 'SemiBold',
+    fontSize: fontSize.small,
     color: colors.white,
     fontWeight: '500',
     bottom: 2,
