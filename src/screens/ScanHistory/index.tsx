@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -15,18 +15,25 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import UserHeader from '../../components/UserHeader';
 import {colors, sizes} from '../../services/utilities';
+import {useSelector} from 'react-redux';
+import {selectUserData} from '../../store/userSlice';
+import {selectScans} from '../../store/scanSlice';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Scann'>;
 
 const ScanHistory: React.FC = (): JSX.Element => {
   const navigation = useNavigation<NavigationProp>();
 
+  const userData = useSelector(selectUserData);
+  const allScans = useSelector(selectScans);
+  const car = useMemo(() => {
+    return userData?.cars?.find(car => car.selected);
+  }, [userData]);
+
   const [search, setSearch] = useState<string>('');
   const [errMsg, setErrMsg] = useState<string>('');
-  const [make, setMake] = useState<string>('Honda');
-  const [model, setModel] = useState<string>('Civic');
-  const [year, setYear] = useState<string>('2005');
-  const [imageUri, setImageUri] = useState<any>(images.carImg);
+
+  console.log(car, allScans);
 
   type ScanHistory = {
     carName: string;
@@ -72,6 +79,24 @@ const ScanHistory: React.FC = (): JSX.Element => {
     },
   ]);
 
+  function formatCreatedAt(createdAt: string): string {
+    const dateObj = new Date(createdAt);
+
+    const formattedTime = dateObj.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+    });
+
+    const month = dateObj.getMonth() + 1; // Months are 0-indexed
+    const day = dateObj.getDate();
+    const year = dateObj.getFullYear();
+
+    const formattedDate = `${month}/${day}/${year}`;
+
+    return `${formattedTime}  -  ${formattedDate}`;
+  }
+
   const handleHistory = () => {
     navigation.navigate('DetailedHistory');
   };
@@ -101,17 +126,20 @@ const ScanHistory: React.FC = (): JSX.Element => {
             <View style={styles.sectionContainer}>
               <View style={styles.vehicleContainer}>
                 <View style={styles.uploadImgContainer}>
-                  <Image style={styles.uploadImgPreview} source={imageUri} />
+                  <Image
+                    style={styles.uploadImgPreview}
+                    source={{uri: car?.image}}
+                  />
                 </View>
               </View>
 
               <View style={styles.waveRow}>
                 <View style={styles.row}>
                   <Text style={styles.textWhite}>
-                    {make} {model}
+                    {car?.make} {car?.model}
                   </Text>
                   <View style={styles.orangeContainer}>
-                    <Text style={styles.textWhite}>{year}</Text>
+                    <Text style={styles.textWhite}>{car?.year}</Text>
                   </View>
                 </View>
                 {/* <Image style={styles.waveIcon} source={images.waveIcon} /> */}
@@ -131,38 +159,29 @@ const ScanHistory: React.FC = (): JSX.Element => {
                 />
               </View>
               <ScrollView showsVerticalScrollIndicator={false}>
-                {scanHistory.map((item, index) => {
+                {allScans.map((item, index) => {
                   return (
                     <View key={index} style={styles.row2}>
                       <View style={styles.row}>
                         <Image
-                          source={item.image}
+                          source={{uri: item.vehicleImage}}
                           style={styles.historyCarImg}
                         />
                         <View>
                           <Text style={styles.historyTitle}>
-                            {item.carName}
+                            {item.vehicleInfo}
                           </Text>
                           <View style={styles.row}>
                             <View style={styles.codeContainerMain}>
                               <View style={styles.codeContainer}>
                                 <Text style={styles.textWhiteSmall}>
-                                  {item.codes} Codes
+                                  {item.dtcCode}
                                 </Text>
                               </View>
                             </View>
-
-                            <View
-                              style={
-                                item.status === 'red'
-                                  ? styles.red
-                                  : item.status === 'green'
-                                  ? styles.green
-                                  : null
-                              }></View>
                           </View>
                           <Text style={styles.disabledTextSmall}>
-                            {item.dateAndTime}
+                            {formatCreatedAt(item.createdAt)}
                           </Text>
                         </View>
                       </View>

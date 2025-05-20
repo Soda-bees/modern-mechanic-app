@@ -20,6 +20,7 @@ const API_ENDPOINTS = {
   deleteReview: '/user/delete_review',
   processDtcs: '/user/process_dtc',
   selectCar: '/user/select_car',
+  getAllScans: '/user/get_all_scans',
 };
 
 type CheckEmailResponse = {
@@ -609,6 +610,7 @@ export type ProcessDtcsBody = {
   dtcs: string[];
   userDescription: string;
   vehicleInfo: string;
+  vehicleImage?: string;
 };
 
 export type ProcessDtcsResponse = {
@@ -677,6 +679,61 @@ export const selectCar = async (
     return response.data; // Return the response data
   } catch (error: any) {
     console.error('Select Car API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
+  }
+};
+
+export type ScanData = {
+  id: number;
+  dtcCode: string;
+  description: string;
+  analysis: string;
+  repairInstructions: string;
+  urgencyLevel: string;
+  urgencyColor: string;
+  urgencyExplanation: string;
+  repairDifficulty: string;
+  difficultyColor: string;
+  difficultyExplanation: string;
+  costEstimate: string;
+  requiredParts: string[];
+  requiredTools: string[];
+  youtubeVideos: string[];
+  userNotes: string;
+  vehicleInfo: string;
+  vehicleImage: string;
+  createdAt: string;
+};
+
+export type GetAllScansResponse = {
+  message: string;
+  scans: ScanData[];
+  success: boolean;
+  error?: any;
+};
+
+export const getAllScans = async (
+  authToken: string | null,
+): Promise<GetAllScansResponse | undefined> => {
+  try {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    };
+    console.log('heyyyy');
+
+    const response = await axiosInstance.get<GetAllScansResponse>(
+      API_ENDPOINTS.getAllScans,
+      {
+        headers,
+        validateStatus: status => status >= 200 && status < 500,
+      },
+    );
+    console.log(response, 'hellooo');
+
+    return response.data;
+  } catch (error: any) {
+    console.error('GetAllScans API error:', error.message || error);
     throw {success: false, message: error.message || 'Unknown error'};
   }
 };

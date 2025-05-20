@@ -1,7 +1,9 @@
 import axios, {AxiosInstance, AxiosResponse, AxiosError} from 'axios';
 
 // Define the base URL for the API
-export const BASE_URL: string = 'http://192.168.100.199:5000/';
+// export const BASE_URL: string = 'http://192.168.100.199:5000/';
+export const BASE_URL: string = 'http://192.168.18.27:5000/';
+
 // export const BASE_URL: string = 'https://obd-8dbb3da637bf.herokuapp.com/'; // Live
 
 // Create an Axios instance

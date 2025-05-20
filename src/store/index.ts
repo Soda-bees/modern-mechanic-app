@@ -6,12 +6,14 @@ import authSlice from './authSlice';
 import userSlice from './userSlice';
 import reviewsSlice from './reviewSlice';
 import dtcReportSlice from './dtcReportSlice';
+import scanReducer from './scanSlice';
 
 const rootReducer = combineReducers({
   auth: authSlice,
   user: userSlice,
   reviews: reviewsSlice,
   dtcReport: dtcReportSlice,
+  scans: scanReducer,
 });
 
 const persistConfig = {

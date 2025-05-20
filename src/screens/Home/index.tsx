@@ -8,10 +8,15 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import UserHeader from '../../components/UserHeader';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectUserData, setUserData} from '../../store/userSlice';
-import {getAllReviews, getUserDetails} from '../../services/config/API';
+import {
+  getAllReviews,
+  getAllScans,
+  getUserDetails,
+} from '../../services/config/API';
 import {AppDispatch} from '../../store';
 import {selectAuthToken} from '../../store/authSlice';
 import {setAllReviews} from '../../store/reviewSlice';
+import {setScans} from '../../store/scanSlice';
 
 type NavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -32,9 +37,10 @@ const Home: React.FC = (): JSX.Element => {
     const fetchData = async () => {
       if (!authToken) return;
       try {
-        const [userRes, reviewRes] = await Promise.all([
+        const [userRes, reviewRes, scanRes] = await Promise.all([
           getUserDetails(authToken),
           getAllReviews(authToken),
+          getAllScans(authToken),
         ]);
 
         if (userRes?.success) {
@@ -45,6 +51,10 @@ const Home: React.FC = (): JSX.Element => {
         if (reviewRes?.success) {
           console.log('Response: allReviews', reviewRes);
           dispatch(setAllReviews(reviewRes.reviews));
+        }
+        if (scanRes?.success) {
+          console.log('Response: allScans', scanRes);
+          dispatch(setScans(scanRes.scans));
         }
       } catch (error) {
         console.error('Error fetching home screen data:', error);

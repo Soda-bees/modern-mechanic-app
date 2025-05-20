@@ -568,6 +568,7 @@ const Scann: React.FC = (): JSX.Element => {
 
   const handleProcessDtcs = async () => {
     const vehicleInfo = `${car?.make} ${car?.model} ${car?.year}`;
+    const vehicleImage = car?.image;
 
     if (!dtcs?.length || !notes) {
       Alert.alert(
@@ -588,6 +589,7 @@ const Scann: React.FC = (): JSX.Element => {
           dtcs: [dtc], // Sending only one DTC at a time
           userDescription: notes,
           vehicleInfo,
+          vehicleImage,
         };
 
         try {
