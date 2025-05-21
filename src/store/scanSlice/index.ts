@@ -6,7 +6,7 @@ export interface ScanData {
   dtcCode: string;
   description: string;
   analysis: string;
-  repairInstructions: string;
+  repairInstructions: string[];
   urgencyLevel: string;
   urgencyColor: string;
   urgencyExplanation: string;

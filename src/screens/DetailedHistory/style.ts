@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
 
   textWhiteSmall: {
     fontFamily: 'Regular',
-    fontSize: fontSize.small,
+    fontSize: fontSize.smallM,
     color: colors.white,
   },
 
@@ -313,7 +313,7 @@ const styles = StyleSheet.create({
   codeContainerOrange: {
     backgroundColor: colors.appOrange,
     paddingVertical: 2,
-    paddingBottom: 4,
+    paddingBottom: 5,
     paddingHorizontal: 8,
     borderRadius: 5,
   },
@@ -355,9 +355,10 @@ const styles = StyleSheet.create({
   },
 
   urgencyO: {
-    height: sizes.screenHeight * 0.17,
-    width: sizes.screenWidth * 0.7,
+    height: sizes.screenHeight * 0.2,
+    width: sizes.screenWidth * 0.8,
     resizeMode: 'contain',
+    alignSelf: 'center',
   },
 
   colourRow: {

@@ -97,8 +97,8 @@ const ScanHistory: React.FC = (): JSX.Element => {
     return `${formattedTime}  -  ${formattedDate}`;
   }
 
-  const handleHistory = () => {
-    navigation.navigate('DetailedHistory');
+  const handleHistory = (id: number) => {
+    navigation.navigate('DetailedHistory', {id});
   };
 
   const handleScanHistory = () => {};
@@ -186,7 +186,10 @@ const ScanHistory: React.FC = (): JSX.Element => {
                         </View>
                       </View>
 
-                      <TouchableOpacity onPress={handleHistory}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          handleHistory(item?.id);
+                        }}>
                         <Image
                           source={images.rightArrow}
                           style={styles.rightArrow}

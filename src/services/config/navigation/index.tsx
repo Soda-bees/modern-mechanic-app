@@ -62,7 +62,7 @@ export type RootStackParamList = {
   WorkshopDetails: any;
   ScanResult: any;
   ScanHistory: any;
-  DetailedHistory: any;
+  DetailedHistory: {id: number};
   AddUserVehicle: any;
   BLEScanScreen: any;
   Profile: any;
