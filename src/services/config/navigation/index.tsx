@@ -27,6 +27,7 @@ import EditProfile from '../../../screens/EditProfile';
 import Security from '../../../screens/Security';
 import ScanResultDemo from '../../../screens/ScanResultDemo';
 import {DTCResponse, ProcessDtcsResponse} from '../API';
+import Complain from '../../../screens/Complain';
 
 export type VehicleDataType = {
   make: string;
@@ -69,6 +70,7 @@ export type RootStackParamList = {
   EditProfile: any;
   Security: any;
   ScanResultDemo: any;
+  Complain: {id: number};
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -110,6 +112,7 @@ const MainNavigator: React.FC = (): JSX.Element => {
             <Stack.Screen name="EditProfile" component={EditProfile} />
             <Stack.Screen name="Security" component={Security} />
             <Stack.Screen name="ScanResultDemo" component={ScanResultDemo} />
+            <Stack.Screen name="Complain" component={Complain} />
           </>
         )}
       </Stack.Navigator>

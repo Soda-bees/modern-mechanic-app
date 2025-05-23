@@ -21,6 +21,7 @@ const API_ENDPOINTS = {
   processDtcs: '/user/process_dtc',
   selectCar: '/user/select_car',
   getAllScans: '/user/get_all_scans',
+  submitComplaint: '/user/submit_complaint',
 };
 
 type CheckEmailResponse = {
@@ -734,6 +735,47 @@ export const getAllScans = async (
     return response.data;
   } catch (error: any) {
     console.error('GetAllScans API error:', error.message || error);
+    throw {success: false, message: error.message || 'Unknown error'};
+  }
+};
+
+export type submitComplaintBody = {
+  scanId: number;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  description: string;
+};
+
+export type submitComplaintResponse = {
+  message: string;
+  complaint: any;
+  success: boolean;
+  error?: any;
+};
+
+export const submitComplaint = async (
+  body: submitComplaintBody,
+  authToken: string | null,
+): Promise<submitComplaintResponse> => {
+  try {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    };
+
+    const response = await axiosInstance.post<submitComplaintResponse>(
+      API_ENDPOINTS.submitComplaint,
+      body,
+      {
+        headers,
+        validateStatus: status => status >= 200 && status < 500,
+      },
+    );
+
+    return response.data;
+  } catch (error: any) {
+    console.error('SubmitComplaint API error:', error.message || error);
     throw {success: false, message: error.message || 'Unknown error'};
   }
 };

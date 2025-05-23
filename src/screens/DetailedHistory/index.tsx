@@ -19,6 +19,7 @@ import {StarRatingDisplay} from 'react-native-star-rating-widget';
 import {useSelector} from 'react-redux';
 import {selectUserData} from '../../store/userSlice';
 import {selectScans} from '../../store/scanSlice';
+import OrangeButton from '../../components/OrangeButton';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Scann'>;
 
@@ -192,6 +193,10 @@ const DetailedHistory: React.FC = (): JSX.Element => {
       default:
         return images.difficultyG; // default fallback
     }
+  };
+
+  const handleComplain = (id: number) => {
+    navigation.navigate('Complain', {id});
   };
 
   return (
@@ -373,6 +378,24 @@ const DetailedHistory: React.FC = (): JSX.Element => {
                   <Text style={styles.textWhiteSmall}>
                     {scan?.createdAt ? formatCreatedAt(scan.createdAt) : ''}
                   </Text> */}
+
+                  <View style={styles.hr}></View>
+
+                  <Text style={styles.title}>Unsatisfied?</Text>
+                  <Text style={styles.textWhiteSmall}>
+                    Feel free to submit your complain or any issues regarding
+                    the scan result.
+                  </Text>
+                  <View style={{marginTop: sizes.screenHeight * 0.04}}>
+                    <OrangeButton
+                      title="Complain Form"
+                      onPress={() => {
+                        if (scan?.id) {
+                          handleComplain(scan?.id);
+                        }
+                      }}
+                    />
+                  </View>
                 </View>
 
                 {/* <View>
