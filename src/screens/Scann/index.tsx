@@ -448,7 +448,7 @@ const Scann: React.FC = (): JSX.Element => {
       }
 
       // ✅ **STEP 3: Initialize the Adapter**
-      const initCommands = ['ATZ', 'ATE0', 'ATL0', 'ATSP0'];
+      const initCommands = ['ATZ', 'ATH0', 'ATE0', 'ATL0', 'ATSP0'];
       for (const command of initCommands) {
         try {
           const response = await sendCommand(command);
@@ -457,6 +457,9 @@ const Scann: React.FC = (): JSX.Element => {
           console.warn(`⚠️ Command ${command} timed out.`);
         }
       }
+
+      // Wait for initialization to complete
+      await new Promise(resolve => setTimeout(resolve, 400));
 
       console.log('🚀 ELM327 Initialized.');
 
