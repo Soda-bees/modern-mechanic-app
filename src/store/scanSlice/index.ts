@@ -20,6 +20,7 @@ export interface ScanData {
   userNotes: string;
   vehicleInfo: string;
   vehicleImage: string;
+  vehicleId: any;
   createdAt: string;
 }
 
