@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     borderRadius: sizes.screenHeight * 0.1,
     alignSelf: 'center',
     flexDirection: 'row',
-    marginTop: sizes.screenHeight * 0.04,
+    // marginTop: sizes.screenHeight * 0.04,
   },
 
   orangeBtn2: {
@@ -184,9 +184,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 50,
     alignSelf: 'flex-end',
-    position: 'absolute',
-    bottom: sizes.screenHeight * 0.03,
-    right: sizes.screenWidth * 0.05,
+    marginTop: 10,
   },
 
   chatBot: {

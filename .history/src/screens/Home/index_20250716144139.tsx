@@ -28,7 +28,7 @@ type NavigationProp = StackNavigationProp<
   | 'Profile'
   | 'ScanResultDemo'
   | 'AiAssistantChat'
-  | 'LiveData'
+  | LiveData
 >;
 
 const Home: React.FC = (): JSX.Element => {

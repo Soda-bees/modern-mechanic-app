@@ -184,9 +184,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 50,
     alignSelf: 'flex-end',
-    position: 'absolute',
-    bottom: sizes.screenHeight * 0.03,
-    right: sizes.screenWidth * 0.05,
+    marginTop: 10,
   },
 
   chatBot: {

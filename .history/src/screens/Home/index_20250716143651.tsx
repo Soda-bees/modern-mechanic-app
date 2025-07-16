@@ -28,7 +28,6 @@ type NavigationProp = StackNavigationProp<
   | 'Profile'
   | 'ScanResultDemo'
   | 'AiAssistantChat'
-  | 'LiveData'
 >;
 
 const Home: React.FC = (): JSX.Element => {
@@ -89,7 +88,7 @@ const Home: React.FC = (): JSX.Element => {
   };
 
   const handleGoToLiveData = () => {
-    navigation.navigate('LiveData');
+    navigation.navigate('AiAssistantChat');
   };
 
   return (
@@ -122,10 +121,10 @@ const Home: React.FC = (): JSX.Element => {
             </View>
           </View>
           <View style={styles.lowerBody}>
-            {/* <Text style={styles.title}>Scan</Text> */}
+            <Text style={styles.title}>Scan</Text>
             <TouchableOpacity style={styles.orangeBtn} onPress={handleGoToScan}>
               <Image source={images.scanIcon} style={styles.scanIcon} />
-              <Text style={styles.orangeBtnLabel}>Scan</Text>
+              {/* <Text style={styles.orangeBtnLabel}>Scan</Text> */}
             </TouchableOpacity>
 
             <TouchableOpacity

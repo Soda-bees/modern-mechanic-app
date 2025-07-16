@@ -28,7 +28,6 @@ type NavigationProp = StackNavigationProp<
   | 'Profile'
   | 'ScanResultDemo'
   | 'AiAssistantChat'
-  | 'LiveData'
 >;
 
 const Home: React.FC = (): JSX.Element => {
@@ -89,7 +88,7 @@ const Home: React.FC = (): JSX.Element => {
   };
 
   const handleGoToLiveData = () => {
-    navigation.navigate('LiveData');
+    navigation.navigate('AiAssistantChat');
   };
 
   return (
