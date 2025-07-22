@@ -8,26 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* OBDAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* OBDAppTests.m */; };
-		0C80B921A6F3F58F76C31292 /* libPods-OBDApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-OBDApp.a */; };
+		02B291FC015A4C119E857281 /* MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 367ECC7A9C804F069284152A /* MediumItalic.ttf */; };
+		05FA5E0D2AF733BF66D36AFC /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 6123ECA6D11F3B3BA5C06553 /* PrivacyInfo.xcprivacy */; };
+		0884429DE308408C93370056 /* LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F16E03D6FD6846A1B890D59F /* LightItalic.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7699B88040F8A987B510C191 /* libPods-OBDApp-OBDAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-OBDApp-OBDAppTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		1A38CB545A3F41FD9387EDBB /* SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECE7CD5AEF7C4CB08FF85A2B /* SemiBold.ttf */; };
 		2592DD649C9C49BA9FF93BF9 /* Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEF9AD5DE5AA4F0F98CE365A /* Bold.ttf */; };
-		2BF0681BEFB14F9D909C102C /* BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5201A9DD15EE4BC3915794D6 /* BoldItalic.ttf */; };
-		31D261CC141240479AEEB01A /* ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 81422CAF8A86490987F7E38D /* ExtraBold.ttf */; };
-		C244629EA29240A899B2156B /* ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F383447857B3497F829A6A56 /* ExtraBoldItalic.ttf */; };
-		80711B9F57704DAB97375054 /* ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 808DCB31B7184FC38179F95D /* ExtraLight.ttf */; };
 		265CA745D22E4436BDA81CF8 /* ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7425F1ECAA0B49228231E9CB /* ExtraLightItalic.ttf */; };
 		26B7F9F742AE4571A090FA9E /* Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA460BF039D54EE3A2168185 /* Italic.ttf */; };
-		5250BBE4CE2946D8BA5C399B /* Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA880C46389C49B781CEDF5E /* Light.ttf */; };
-		0884429DE308408C93370056 /* LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F16E03D6FD6846A1B890D59F /* LightItalic.ttf */; };
+		2BF0681BEFB14F9D909C102C /* BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5201A9DD15EE4BC3915794D6 /* BoldItalic.ttf */; };
 		2F252DA582AB40EAA6445AC2 /* Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13520C71C1694C9C81FC5570 /* Medium.ttf */; };
-		02B291FC015A4C119E857281 /* MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 367ECC7A9C804F069284152A /* MediumItalic.ttf */; };
+		31D261CC141240479AEEB01A /* ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 81422CAF8A86490987F7E38D /* ExtraBold.ttf */; };
 		45A88877578B4FE8A6CAED0E /* Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 229AE53C47244F18BA52B0FC /* Regular.ttf */; };
-		1A38CB545A3F41FD9387EDBB /* SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECE7CD5AEF7C4CB08FF85A2B /* SemiBold.ttf */; };
+		5250BBE4CE2946D8BA5C399B /* Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA880C46389C49B781CEDF5E /* Light.ttf */; };
+		796FF8FE7CF50ADFF22425B3 /* libPods-OBDApp-OBDAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE5A434CD75174D405AC472 /* libPods-OBDApp-OBDAppTests.a */; };
+		80711B9F57704DAB97375054 /* ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 808DCB31B7184FC38179F95D /* ExtraLight.ttf */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		BE32841C31EA4026A45C3FFF /* SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9FC507392B4E03A67F9E1F /* SemiBoldItalic.ttf */; };
+		C244629EA29240A899B2156B /* ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F383447857B3497F829A6A56 /* ExtraBoldItalic.ttf */; };
+		C7693A465E0D358DB91F3EC9 /* libPods-OBDApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E30B293947C738F2652DBDE0 /* libPods-OBDApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,8 @@
 		00E356EE1AD99517003FC87E /* OBDAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OBDAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* OBDAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OBDAppTests.m; sourceTree = "<group>"; };
+		020AFA71E16D3FDCD07FDC33 /* Pods-OBDApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OBDApp.release.xcconfig"; path = "Target Support Files/Pods-OBDApp/Pods-OBDApp.release.xcconfig"; sourceTree = "<group>"; };
+		13520C71C1694C9C81FC5570 /* Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Medium.ttf; path = ../assets/fonts/Medium.ttf; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* OBDApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OBDApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = OBDApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = OBDApp/AppDelegate.mm; sourceTree = "<group>"; };
@@ -51,28 +54,27 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = OBDApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = OBDApp/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = OBDApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-OBDApp-OBDAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OBDApp-OBDAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B4392A12AC88292D35C810B /* Pods-OBDApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OBDApp.debug.xcconfig"; path = "Target Support Files/Pods-OBDApp/Pods-OBDApp.debug.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-OBDApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OBDApp.release.xcconfig"; path = "Target Support Files/Pods-OBDApp/Pods-OBDApp.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-OBDApp-OBDAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OBDApp-OBDAppTests.debug.xcconfig"; path = "Target Support Files/Pods-OBDApp-OBDAppTests/Pods-OBDApp-OBDAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-OBDApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OBDApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		229AE53C47244F18BA52B0FC /* Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Regular.ttf; path = ../assets/fonts/Regular.ttf; sourceTree = "<group>"; };
+		367ECC7A9C804F069284152A /* MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = MediumItalic.ttf; path = ../assets/fonts/MediumItalic.ttf; sourceTree = "<group>"; };
+		493F780B71303FF657354DE3 /* Pods-OBDApp-OBDAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OBDApp-OBDAppTests.release.xcconfig"; path = "Target Support Files/Pods-OBDApp-OBDAppTests/Pods-OBDApp-OBDAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		4EE5A434CD75174D405AC472 /* libPods-OBDApp-OBDAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OBDApp-OBDAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5201A9DD15EE4BC3915794D6 /* BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = BoldItalic.ttf; path = ../assets/fonts/BoldItalic.ttf; sourceTree = "<group>"; };
+		6123ECA6D11F3B3BA5C06553 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = OBDApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		7425F1ECAA0B49228231E9CB /* ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = ExtraLightItalic.ttf; path = ../assets/fonts/ExtraLightItalic.ttf; sourceTree = "<group>"; };
+		808DCB31B7184FC38179F95D /* ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = ExtraLight.ttf; path = ../assets/fonts/ExtraLight.ttf; sourceTree = "<group>"; };
+		81422CAF8A86490987F7E38D /* ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = ExtraBold.ttf; path = ../assets/fonts/ExtraBold.ttf; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OBDApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-OBDApp-OBDAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OBDApp-OBDAppTests.release.xcconfig"; path = "Target Support Files/Pods-OBDApp-OBDAppTests/Pods-OBDApp-OBDAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		AB2D65F5F9EA961E8B02D08F /* Pods-OBDApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OBDApp.debug.xcconfig"; path = "Target Support Files/Pods-OBDApp/Pods-OBDApp.debug.xcconfig"; sourceTree = "<group>"; };
+		BB9B76BDBC96751723713D02 /* Pods-OBDApp-OBDAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OBDApp-OBDAppTests.debug.xcconfig"; path = "Target Support Files/Pods-OBDApp-OBDAppTests/Pods-OBDApp-OBDAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CA460BF039D54EE3A2168185 /* Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Italic.ttf; path = ../assets/fonts/Italic.ttf; sourceTree = "<group>"; };
+		CEF9AD5DE5AA4F0F98CE365A /* Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Bold.ttf; path = ../assets/fonts/Bold.ttf; sourceTree = "<group>"; };
+		DA9FC507392B4E03A67F9E1F /* SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = SemiBoldItalic.ttf; path = ../assets/fonts/SemiBoldItalic.ttf; sourceTree = "<group>"; };
+		E30B293947C738F2652DBDE0 /* libPods-OBDApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OBDApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA880C46389C49B781CEDF5E /* Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Light.ttf; path = ../assets/fonts/Light.ttf; sourceTree = "<group>"; };
+		ECE7CD5AEF7C4CB08FF85A2B /* SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = SemiBold.ttf; path = ../assets/fonts/SemiBold.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		CEF9AD5DE5AA4F0F98CE365A /* Bold.ttf */ = {isa = PBXFileReference; name = "Bold.ttf"; path = "../assets/fonts/Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5201A9DD15EE4BC3915794D6 /* BoldItalic.ttf */ = {isa = PBXFileReference; name = "BoldItalic.ttf"; path = "../assets/fonts/BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		81422CAF8A86490987F7E38D /* ExtraBold.ttf */ = {isa = PBXFileReference; name = "ExtraBold.ttf"; path = "../assets/fonts/ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F383447857B3497F829A6A56 /* ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "ExtraBoldItalic.ttf"; path = "../assets/fonts/ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		808DCB31B7184FC38179F95D /* ExtraLight.ttf */ = {isa = PBXFileReference; name = "ExtraLight.ttf"; path = "../assets/fonts/ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7425F1ECAA0B49228231E9CB /* ExtraLightItalic.ttf */ = {isa = PBXFileReference; name = "ExtraLightItalic.ttf"; path = "../assets/fonts/ExtraLightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		CA460BF039D54EE3A2168185 /* Italic.ttf */ = {isa = PBXFileReference; name = "Italic.ttf"; path = "../assets/fonts/Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		EA880C46389C49B781CEDF5E /* Light.ttf */ = {isa = PBXFileReference; name = "Light.ttf"; path = "../assets/fonts/Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F16E03D6FD6846A1B890D59F /* LightItalic.ttf */ = {isa = PBXFileReference; name = "LightItalic.ttf"; path = "../assets/fonts/LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		13520C71C1694C9C81FC5570 /* Medium.ttf */ = {isa = PBXFileReference; name = "Medium.ttf"; path = "../assets/fonts/Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		367ECC7A9C804F069284152A /* MediumItalic.ttf */ = {isa = PBXFileReference; name = "MediumItalic.ttf"; path = "../assets/fonts/MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		229AE53C47244F18BA52B0FC /* Regular.ttf */ = {isa = PBXFileReference; name = "Regular.ttf"; path = "../assets/fonts/Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		ECE7CD5AEF7C4CB08FF85A2B /* SemiBold.ttf */ = {isa = PBXFileReference; name = "SemiBold.ttf"; path = "../assets/fonts/SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DA9FC507392B4E03A67F9E1F /* SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "SemiBoldItalic.ttf"; path = "../assets/fonts/SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F16E03D6FD6846A1B890D59F /* LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = LightItalic.ttf; path = ../assets/fonts/LightItalic.ttf; sourceTree = "<group>"; };
+		F383447857B3497F829A6A56 /* ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = ExtraBoldItalic.ttf; path = ../assets/fonts/ExtraBoldItalic.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-OBDApp-OBDAppTests.a in Frameworks */,
+				796FF8FE7CF50ADFF22425B3 /* libPods-OBDApp-OBDAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-OBDApp.a in Frameworks */,
+				C7693A465E0D358DB91F3EC9 /* libPods-OBDApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +124,7 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				6123ECA6D11F3B3BA5C06553 /* PrivacyInfo.xcprivacy */,
 			);
 			name = OBDApp;
 			sourceTree = "<group>";
@@ -130,10 +133,32 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-OBDApp.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-OBDApp-OBDAppTests.a */,
+				E30B293947C738F2652DBDE0 /* libPods-OBDApp.a */,
+				4EE5A434CD75174D405AC472 /* libPods-OBDApp-OBDAppTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		50EB1ADD48FF412F9B34FA64 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CEF9AD5DE5AA4F0F98CE365A /* Bold.ttf */,
+				5201A9DD15EE4BC3915794D6 /* BoldItalic.ttf */,
+				81422CAF8A86490987F7E38D /* ExtraBold.ttf */,
+				F383447857B3497F829A6A56 /* ExtraBoldItalic.ttf */,
+				808DCB31B7184FC38179F95D /* ExtraLight.ttf */,
+				7425F1ECAA0B49228231E9CB /* ExtraLightItalic.ttf */,
+				CA460BF039D54EE3A2168185 /* Italic.ttf */,
+				EA880C46389C49B781CEDF5E /* Light.ttf */,
+				F16E03D6FD6846A1B890D59F /* LightItalic.ttf */,
+				13520C71C1694C9C81FC5570 /* Medium.ttf */,
+				367ECC7A9C804F069284152A /* MediumItalic.ttf */,
+				229AE53C47244F18BA52B0FC /* Regular.ttf */,
+				ECE7CD5AEF7C4CB08FF85A2B /* SemiBold.ttf */,
+				DA9FC507392B4E03A67F9E1F /* SemiBoldItalic.ttf */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -171,35 +196,13 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-OBDApp.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-OBDApp.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-OBDApp-OBDAppTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-OBDApp-OBDAppTests.release.xcconfig */,
+				AB2D65F5F9EA961E8B02D08F /* Pods-OBDApp.debug.xcconfig */,
+				020AFA71E16D3FDCD07FDC33 /* Pods-OBDApp.release.xcconfig */,
+				BB9B76BDBC96751723713D02 /* Pods-OBDApp-OBDAppTests.debug.xcconfig */,
+				493F780B71303FF657354DE3 /* Pods-OBDApp-OBDAppTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		50EB1ADD48FF412F9B34FA64 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				CEF9AD5DE5AA4F0F98CE365A /* Bold.ttf */,
-				5201A9DD15EE4BC3915794D6 /* BoldItalic.ttf */,
-				81422CAF8A86490987F7E38D /* ExtraBold.ttf */,
-				F383447857B3497F829A6A56 /* ExtraBoldItalic.ttf */,
-				808DCB31B7184FC38179F95D /* ExtraLight.ttf */,
-				7425F1ECAA0B49228231E9CB /* ExtraLightItalic.ttf */,
-				CA460BF039D54EE3A2168185 /* Italic.ttf */,
-				EA880C46389C49B781CEDF5E /* Light.ttf */,
-				F16E03D6FD6846A1B890D59F /* LightItalic.ttf */,
-				13520C71C1694C9C81FC5570 /* Medium.ttf */,
-				367ECC7A9C804F069284152A /* MediumItalic.ttf */,
-				229AE53C47244F18BA52B0FC /* Regular.ttf */,
-				ECE7CD5AEF7C4CB08FF85A2B /* SemiBold.ttf */,
-				DA9FC507392B4E03A67F9E1F /* SemiBoldItalic.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -208,12 +211,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "OBDAppTests" */;
 			buildPhases = (
-				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				119B7D6B0B05274D0CAA773F /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
-				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+				99BD20A0465419028AA66DAF /* [CP] Embed Pods Frameworks */,
+				8A7557ECDC4E231ACEA30501 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -229,13 +232,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "OBDApp" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				918A9F382393B53044B97976 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				F23586A1809EE539B846C623 /* [CP] Embed Pods Frameworks */,
+				BD43D65EBDB0F3B17481452F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -310,6 +313,7 @@
 				45A88877578B4FE8A6CAED0E /* Regular.ttf in Resources */,
 				1A38CB545A3F41FD9387EDBB /* SemiBold.ttf in Resources */,
 				BE32841C31EA4026A45C3FFF /* SemiBoldItalic.ttf in Resources */,
+				05FA5E0D2AF733BF66D36AFC /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,24 +336,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OBDApp/Pods-OBDApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OBDApp/Pods-OBDApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OBDApp/Pods-OBDApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
+		119B7D6B0B05274D0CAA773F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -371,7 +358,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		8A7557ECDC4E231ACEA30501 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OBDApp-OBDAppTests/Pods-OBDApp-OBDAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OBDApp-OBDAppTests/Pods-OBDApp-OBDAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OBDApp-OBDAppTests/Pods-OBDApp-OBDAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		918A9F382393B53044B97976 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -393,7 +397,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
+		99BD20A0465419028AA66DAF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -410,7 +414,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OBDApp-OBDAppTests/Pods-OBDApp-OBDAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+		BD43D65EBDB0F3B17481452F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -427,21 +431,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OBDApp/Pods-OBDApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
+		F23586A1809EE539B846C623 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OBDApp-OBDAppTests/Pods-OBDApp-OBDAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-OBDApp/Pods-OBDApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OBDApp-OBDAppTests/Pods-OBDApp-OBDAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-OBDApp/Pods-OBDApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OBDApp-OBDAppTests/Pods-OBDApp-OBDAppTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OBDApp/Pods-OBDApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -477,7 +481,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-OBDApp-OBDAppTests.debug.xcconfig */;
+			baseConfigurationReference = BB9B76BDBC96751723713D02 /* Pods-OBDApp-OBDAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -504,7 +508,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-OBDApp-OBDAppTests.release.xcconfig */;
+			baseConfigurationReference = 493F780B71303FF657354DE3 /* Pods-OBDApp-OBDAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -528,7 +532,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-OBDApp.debug.xcconfig */;
+			baseConfigurationReference = AB2D65F5F9EA961E8B02D08F /* Pods-OBDApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -555,7 +559,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-OBDApp.release.xcconfig */;
+			baseConfigurationReference = 020AFA71E16D3FDCD07FDC33 /* Pods-OBDApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -582,6 +586,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CC = "";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -609,6 +614,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CXX = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
@@ -627,7 +633,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers/react/nativemodule/core",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers/platform/ios",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-Fabric/React_Fabric.framework/Headers/react/renderer/components/view/platform/cxx",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-NativeModulesApple/React_NativeModulesApple.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD = "";
+				LDPLUSPLUS = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -647,7 +666,14 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				USE_HERMES = true;
 			};
 			name = Debug;
 		};
@@ -655,6 +681,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CC = "";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -682,6 +709,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				CXX = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
@@ -693,7 +721,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers/react/nativemodule/core",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers/platform/ios",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-Fabric/React_Fabric.framework/Headers/react/renderer/components/view/platform/cxx",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-NativeModulesApple/React_NativeModulesApple.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD = "";
+				LDPLUSPLUS = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -712,7 +753,13 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
