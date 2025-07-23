@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
-import {Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, Image, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import styles from './style';
 import images from '../../services/utilities/images';
-import {RootStackParamList} from '../../services/config/navigation';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
+import { RootStackParamList } from '../../services/config/navigation';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import UserHeader from '../../components/UserHeader';
 import Modal from 'react-native-modal';
-import {StarRatingDisplay} from 'react-native-star-rating-widget';
-import {colors} from '../../services/utilities';
-import {useSelector} from 'react-redux';
-import {selectAllReviews} from '../../store/reviewSlice';
-import {selectUserData} from '../../store/userSlice';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { StarRatingDisplay } from 'react-native-star-rating-widget';
+import { colors } from '../../services/utilities';
+import { useSelector } from 'react-redux';
+import { selectAllReviews } from '../../store/reviewSlice';
+import { selectUserData } from '../../store/userSlice';
+import { SafeAreaView } from 'react-native-safe-area-context';
 type NavigationProp = StackNavigationProp<
   RootStackParamList,
   'Review' | 'Profile'
@@ -26,11 +26,11 @@ const Feedback: React.FC = (): JSX.Element => {
   const averageRating =
     allReviews.length > 0
       ? Number(
-          (
-            allReviews.reduce((sum, review) => sum + review.rating, 0) /
-            allReviews.length
-          ).toFixed(1),
-        )
+        (
+          allReviews.reduce((sum, review) => sum + review.rating, 0) /
+          allReviews.length
+        ).toFixed(1),
+      )
       : 0;
 
   const isReviewed = allReviews.some(review => review.userId === userData?.id);
@@ -50,7 +50,7 @@ const Feedback: React.FC = (): JSX.Element => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}} edges={['top', 'bottom']}>
+    <SafeAreaView style={{ flex: 1 }} edges={Platform.OS == 'ios' ? ['top'] : ['top', 'bottom']}>
       <Image source={images.bg} style={styles.bg} />
       <View style={styles.screen}>
         <UserHeader onPress={handleGoToProfile} />
@@ -69,7 +69,7 @@ const Feedback: React.FC = (): JSX.Element => {
                     emptyColor={colors.lightGrey}
                     maxStars={5}
                     starSize={26}
-                    starStyle={{marginHorizontal: 0}}
+                    starStyle={{ marginHorizontal: 0 }}
                   />
                 </View>
               </View>
@@ -96,7 +96,7 @@ const Feedback: React.FC = (): JSX.Element => {
                         emptyColor={colors.lightGrey}
                         maxStars={5}
                         starSize={26}
-                        starStyle={{marginHorizontal: 0}}
+                        starStyle={{ marginHorizontal: 0 }}
                       />
                     </View>
                     <Text style={styles.comment}>{item?.reviewText}</Text>

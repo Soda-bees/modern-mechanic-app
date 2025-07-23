@@ -1,23 +1,23 @@
-import React, {useEffect, useMemo} from 'react';
-import {Text, View, Image, TouchableOpacity} from 'react-native';
+import React, { useEffect, useMemo } from 'react';
+import { Text, View, Image, TouchableOpacity, Platform } from 'react-native';
 import styles from './style';
 import images from '../../services/utilities/images';
-import {RootStackParamList} from '../../services/config/navigation';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
+import { RootStackParamList } from '../../services/config/navigation';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import UserHeader from '../../components/UserHeader';
-import {useDispatch, useSelector} from 'react-redux';
-import {selectUserData, setUserData} from '../../store/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUserData, setUserData } from '../../store/userSlice';
 import {
   getAllReviews,
   getAllScans,
   getUserDetails,
 } from '../../services/config/API';
-import {AppDispatch} from '../../store';
-import {selectAuthToken} from '../../store/authSlice';
-import {setAllReviews} from '../../store/reviewSlice';
-import {setScans} from '../../store/scanSlice';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { AppDispatch } from '../../store';
+import { selectAuthToken } from '../../store/authSlice';
+import { setAllReviews } from '../../store/reviewSlice';
+import { setScans } from '../../store/scanSlice';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import OrangeButton from '../../components/OrangeButton';
 
 type NavigationProp = StackNavigationProp<
@@ -93,8 +93,8 @@ const Home: React.FC = (): JSX.Element => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}} edges={['top', 'bottom']}>
-      <View style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }} edges={Platform.OS == 'ios' ? ['top'] : ['top', 'bottom']}>
+      <View style={{ flex: 1 }}>
         <Image source={images.bg} style={styles.bg} />
 
         <View style={styles.screen}>
@@ -104,7 +104,7 @@ const Home: React.FC = (): JSX.Element => {
               <View style={styles.uploadImgContainer}>
                 <Image
                   style={styles.uploadImgPreview}
-                  source={{uri: selectedCar?.image}}
+                  source={{ uri: selectedCar?.image }}
                 />
               </View>
             </View>

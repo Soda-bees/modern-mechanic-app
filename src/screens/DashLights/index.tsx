@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
-import {Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, Image, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import styles from './style';
 import images from '../../services/utilities/images';
-import {RootStackParamList} from '../../services/config/navigation';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
+import { RootStackParamList } from '../../services/config/navigation';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import UserHeader from '../../components/UserHeader';
 import Modal from 'react-native-modal';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 type NavigationProp = StackNavigationProp<
   RootStackParamList,
   'Scann' | 'Profile'
@@ -71,14 +71,14 @@ const DashLights: React.FC = (): JSX.Element => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalData, setModalData] = useState<any>();
 
-  const handleModal = () => {};
+  const handleModal = () => { };
 
   const handleGoToProfile = () => {
     navigation.navigate('Profile');
   };
 
   return (
-    <SafeAreaView style={{flex: 1}} edges={['top', 'bottom']}>
+    <SafeAreaView style={{ flex: 1 }} edges={Platform.OS == 'ios' ? ['top'] : ['top', 'bottom']}>
       <Image source={images.bg} style={styles.bg} />
 
       <View style={styles.screen}>
