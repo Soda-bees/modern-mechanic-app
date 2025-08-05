@@ -1,0 +1,153 @@
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+  ScrollView,
+  Pressable,
+} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+type Option = {
+  id: number;
+  label: string;
+};
+
+type Props = {
+  options: Option[];
+  selected: number[];
+  onChange: (selected: number[]) => void;
+  placeholder?: string;
+};
+
+const CustomMultiSelectDropdown: React.FC<Props> = ({
+  options,
+  selected,
+  onChange,
+  placeholder = 'Select items',
+}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const toggleSelection = (id: number) => {
+    if (selected.includes(id)) {
+      onChange(selected.filter(item => item !== id));
+    } else {
+      onChange([...selected, id]);
+    }
+  };
+
+  const selectedLabels = options
+    .filter(opt => selected.includes(opt.id))
+    .map(opt => opt.label)
+    .join(', ');
+
+  return (
+    <View>
+      <TouchableOpacity
+        style={styles.dropdown}
+        onPress={() => setModalVisible(true)}>
+        <Text style={styles.dropdownText}>
+          {selected.length > 0 ? selectedLabels : placeholder}
+        </Text>
+        <Ionicons name="chevron-down" size={20} color="#555" />
+      </TouchableOpacity>
+
+      <Modal
+        visible={modalVisible}
+        animationType="slide"
+        transparent
+        onRequestClose={() => setModalVisible(false)}>
+        <Pressable
+          style={styles.modalOverlay}
+          onPress={() => setModalVisible(false)}>
+          <Pressable style={styles.modalContent}>
+            <Text style={styles.title}>Select Items</Text>
+            <ScrollView>
+              {options.map(option => (
+                <TouchableOpacity
+                  key={option.id}
+                  style={styles.option}
+                  onPress={() => toggleSelection(option.id)}>
+                  <Text style={styles.optionLabel}>{option.label}</Text>
+                  <Ionicons
+                    name={
+                      selected.includes(option.id)
+                        ? 'checkbox-outline'
+                        : 'square-outline'
+                    }
+                    size={22}
+                    color="#333"
+                  />
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+            <TouchableOpacity
+              style={styles.doneButton}
+              onPress={() => setModalVisible(false)}>
+              <Text style={styles.doneButtonText}>Done</Text>
+            </TouchableOpacity>
+          </Pressable>
+        </Pressable>
+      </Modal>
+    </View>
+  );
+};
+
+export default CustomMultiSelectDropdown;
+
+const styles = StyleSheet.create({
+  dropdown: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  dropdownText: {
+    color: '#333',
+    flex: 1,
+    flexWrap: 'wrap',
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: '#00000088',
+    justifyContent: 'center',
+    padding: 16,
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    maxHeight: '80%',
+    padding: 16,
+  },
+  title: {
+    fontSize: 18,
+    marginBottom: 12,
+    fontWeight: '600',
+  },
+  option: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
+  },
+  optionLabel: {
+    fontSize: 16,
+  },
+  doneButton: {
+    marginTop: 16,
+    backgroundColor: '#007bff',
+    borderRadius: 6,
+    paddingVertical: 10,
+    alignItems: 'center',
+  },
+  doneButtonText: {
+    color: 'white',
+    fontWeight: '600',
+  },
+});
