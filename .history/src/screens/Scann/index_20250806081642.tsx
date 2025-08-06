@@ -528,7 +528,7 @@ const Scann: React.FC = (): JSX.Element => {
         onPress={() => Keyboard.dismiss()}>
         <View style={{flex: 1}}>
           <Image source={images.bg} style={styles.bg} />
-          <View style={{flex: 1}}>
+          <View>
             <View style={styles.screen}>
               <View style={styles.header}>
                 <TouchableOpacity

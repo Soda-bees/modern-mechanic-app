@@ -523,12 +523,10 @@ const Scann: React.FC = (): JSX.Element => {
     <SafeAreaView
       style={{flex: 1}}
       edges={Platform.OS == 'ios' ? ['top'] : ['top', 'bottom']}>
-      <TouchableWithoutFeedback
-        style={{flex: 1}}
-        onPress={() => Keyboard.dismiss()}>
-        <View style={{flex: 1}}>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View>
           <Image source={images.bg} style={styles.bg} />
-          <View style={{flex: 1}}>
+          <View>
             <View style={styles.screen}>
               <View style={styles.header}>
                 <TouchableOpacity

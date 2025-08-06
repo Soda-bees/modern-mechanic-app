@@ -526,75 +526,166 @@ const Scann: React.FC = (): JSX.Element => {
       <TouchableWithoutFeedback
         style={{flex: 1}}
         onPress={() => Keyboard.dismiss()}>
-        <View style={{flex: 1}}>
-          <Image source={images.bg} style={styles.bg} />
-          <View style={{flex: 1}}>
-            <View style={styles.screen}>
-              <View style={styles.header}>
-                <TouchableOpacity
-                  style={styles.backIconContainer}
-                  onPress={() => {
-                    if (index === 0) {
-                      navigation.goBack();
-                    }
-                  }}>
-                  <Image source={images.backIcon} style={styles.backIcon} />
-                </TouchableOpacity>
-                <Text style={styles.headerTitle}>
-                  Modern
-                  <Text style={styles.headerTitleOrange}> Mechanic</Text>
-                </Text>
+        <Image source={images.bg} style={styles.bg} />
+        <View>
+          <View style={styles.screen}>
+            <View style={styles.header}>
+              <TouchableOpacity
+                style={styles.backIconContainer}
+                onPress={() => {
+                  if (index === 0) {
+                    navigation.goBack();
+                  }
+                }}>
+                <Image source={images.backIcon} style={styles.backIcon} />
+              </TouchableOpacity>
+              <Text style={styles.headerTitle}>
+                Modern
+                <Text style={styles.headerTitleOrange}> Mechanic</Text>
+              </Text>
+            </View>
+            <View style={styles.sectionContainer}>
+              <View style={styles.vehicleContainer}>
+                <View style={styles.uploadImgContainer}>
+                  <Image
+                    style={styles.uploadImgPreview}
+                    source={{uri: car?.image}}
+                  />
+                </View>
               </View>
-              <View style={styles.sectionContainer}>
-                <View style={styles.vehicleContainer}>
-                  <View style={styles.uploadImgContainer}>
-                    <Image
-                      style={styles.uploadImgPreview}
-                      source={{uri: car?.image}}
+
+              <View style={styles.waveRow}>
+                <View style={styles.row}>
+                  <Text style={styles.textWhite}>
+                    {car?.make} {car?.model}
+                  </Text>
+                  <View style={styles.orangeContainer}>
+                    <Text style={styles.textWhite}>{car?.year}</Text>
+                  </View>
+                </View>
+                <Image style={styles.waveIcon} source={images.waveIcon} />
+              </View>
+            </View>
+
+            {index === 0 ? (
+              <View style={styles.lowerBody}>
+                <View>
+                  <View style={styles.backRow}>
+                    {index > 0 ? (
+                      <TouchableOpacity
+                        style={styles.backIconContainer}
+                        onPress={() => {
+                          setIndex(index - 1);
+                        }}>
+                        <Image
+                          source={images.backIcon}
+                          style={styles.backIcon}
+                        />
+                      </TouchableOpacity>
+                    ) : null}
+                    <Text style={styles.title}>Plug in</Text>
+                  </View>
+                  <Text style={styles.textWhiteSmall}>
+                    Plug your OBD II into your car
+                  </Text>
+                </View>
+                <View style={styles.bottomRow}>
+                  <Image
+                    source={images.bottomMeter}
+                    style={styles.bottomMeter}
+                  />
+                  <TouchableOpacity
+                    style={styles.nextButton}
+                    onPress={() => {
+                      setIndex(index + 1);
+                    }}>
+                    <Text style={styles.textWhite2}>Next</Text>
+                    <Image source={images.nextIcon} style={styles.nextIcon} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            ) : index === 1 ? (
+              <View style={styles.lowerBody}>
+                <View>
+                  <View style={styles.backRow}>
+                    {index > 0 ? (
+                      <TouchableOpacity
+                        style={styles.backIconContainer}
+                        onPress={() => {
+                          setIndex(index - 1);
+                        }}>
+                        <Image
+                          source={images.backIcon}
+                          style={styles.backIcon}
+                        />
+                      </TouchableOpacity>
+                    ) : null}
+                    <Text style={styles.title}>Connect</Text>
+                  </View>
+                  <Text style={styles.textWhiteSmall}>
+                    Connect Modern Mechanic to your OBD II
+                  </Text>
+
+                  {isScanning ? (
+                    <OrangeButton title={'Scanning...'} onPress={() => {}} />
+                  ) : isConnected ? (
+                    <OrangeButton title={'Scan For DTCs'} onPress={readDTCs} />
+                  ) : (
+                    <OrangeButton
+                      title={'Search For OBDII'}
+                      onPress={handleScanDevices}
                     />
-                  </View>
-                </View>
-
-                <View style={styles.waveRow}>
-                  <View style={styles.row}>
-                    <Text style={styles.textWhite}>
-                      {car?.make} {car?.model}
-                    </Text>
-                    <View style={styles.orangeContainer}>
-                      <Text style={styles.textWhite}>{car?.year}</Text>
-                    </View>
-                  </View>
-                  <Image style={styles.waveIcon} source={images.waveIcon} />
-                </View>
-              </View>
-
-              {index === 0 ? (
-                <View style={styles.lowerBody}>
-                  <View>
-                    <View style={styles.backRow}>
-                      {index > 0 ? (
-                        <TouchableOpacity
-                          style={styles.backIconContainer}
-                          onPress={() => {
-                            setIndex(index - 1);
-                          }}>
-                          <Image
-                            source={images.backIcon}
-                            style={styles.backIcon}
+                  )}
+                  {/* {!isConnected ? ( */}
+                  <FlatList
+                    data={devices}
+                    keyExtractor={item => item?.id}
+                    renderItem={({item}) => (
+                      <TouchableOpacity
+                        style={styles.deviceItem}
+                        onPress={() => {
+                          connectToDevice(item?.id);
+                        }}>
+                        <View>
+                          <Text style={styles.textWhite}>{item?.name}</Text>
+                          <Text style={styles.textWhiteSmall2}>
+                            ID: {item?.id}
+                          </Text>
+                        </View>
+                        {connecting && !isConnected ? (
+                          <ActivityIndicator
+                            color={colors.disabledText}
+                            size={30}
                           />
-                        </TouchableOpacity>
-                      ) : null}
-                      <Text style={styles.title}>Plug in</Text>
-                    </View>
-                    <Text style={styles.textWhiteSmall}>
-                      Plug your OBD II into your car
-                    </Text>
+                        ) : null}
+
+                        {isConnected ? (
+                          <View style={styles.orangeContainer2}>
+                            <Text style={styles.textWhite}>Connected</Text>
+                          </View>
+                        ) : null}
+                      </TouchableOpacity>
+                    )}
+                    scrollEnabled={devices?.length > 2}
+                  />
+                  {/* ) : null} */}
+
+                  <View style={styles.codeRow}>
+                    {dtcs?.map((item, index) => {
+                      return (
+                        <View style={styles.codeContainerOrange} key={index}>
+                          <Text style={styles.codeText}>{item}</Text>
+                        </View>
+                      );
+                    })}
                   </View>
-                  <View style={styles.bottomRow}>
-                    <Image
-                      source={images.bottomMeter}
-                      style={styles.bottomMeter}
-                    />
+                </View>
+                <View style={styles.bottomRow}>
+                  <Image
+                    source={images.bottomMeter}
+                    style={styles.bottomMeter}
+                  />
+                  {dtcs?.length > 0 ? (
                     <TouchableOpacity
                       style={styles.nextButton}
                       onPress={() => {
@@ -603,167 +694,68 @@ const Scann: React.FC = (): JSX.Element => {
                       <Text style={styles.textWhite2}>Next</Text>
                       <Image source={images.nextIcon} style={styles.nextIcon} />
                     </TouchableOpacity>
-                  </View>
+                  ) : null}
                 </View>
-              ) : index === 1 ? (
-                <View style={styles.lowerBody}>
-                  <View>
-                    <View style={styles.backRow}>
-                      {index > 0 ? (
-                        <TouchableOpacity
-                          style={styles.backIconContainer}
-                          onPress={() => {
-                            setIndex(index - 1);
-                          }}>
-                          <Image
-                            source={images.backIcon}
-                            style={styles.backIcon}
-                          />
-                        </TouchableOpacity>
-                      ) : null}
-                      <Text style={styles.title}>Connect</Text>
-                    </View>
-                    <Text style={styles.textWhiteSmall}>
-                      Connect Modern Mechanic to your OBD II
-                    </Text>
-
-                    {isScanning ? (
-                      <OrangeButton title={'Scanning...'} onPress={() => {}} />
-                    ) : isConnected ? (
-                      <OrangeButton
-                        title={'Scan For DTCs'}
-                        onPress={readDTCs}
-                      />
-                    ) : (
-                      <OrangeButton
-                        title={'Search For OBDII'}
-                        onPress={handleScanDevices}
-                      />
-                    )}
-                    {/* {!isConnected ? ( */}
-                    <FlatList
-                      data={devices}
-                      keyExtractor={item => item?.id}
-                      renderItem={({item}) => (
-                        <TouchableOpacity
-                          style={styles.deviceItem}
-                          onPress={() => {
-                            connectToDevice(item?.id);
-                          }}>
-                          <View>
-                            <Text style={styles.textWhite}>{item?.name}</Text>
-                            <Text style={styles.textWhiteSmall2}>
-                              ID: {item?.id}
-                            </Text>
-                          </View>
-                          {connecting && !isConnected ? (
-                            <ActivityIndicator
-                              color={colors.disabledText}
-                              size={30}
-                            />
-                          ) : null}
-
-                          {isConnected ? (
-                            <View style={styles.orangeContainer2}>
-                              <Text style={styles.textWhite}>Connected</Text>
-                            </View>
-                          ) : null}
-                        </TouchableOpacity>
-                      )}
-                      scrollEnabled={devices?.length > 2}
-                    />
-                    {/* ) : null} */}
-
-                    <View style={styles.codeRow}>
-                      {dtcs?.map((item, index) => {
-                        return (
-                          <View style={styles.codeContainerOrange} key={index}>
-                            <Text style={styles.codeText}>{item}</Text>
-                          </View>
-                        );
-                      })}
-                    </View>
-                  </View>
-                  <View style={styles.bottomRow}>
-                    <Image
-                      source={images.bottomMeter}
-                      style={styles.bottomMeter}
-                    />
-                    {dtcs?.length > 0 ? (
+              </View>
+            ) : index === 2 ? (
+              <View style={styles.lowerBody}>
+                <View>
+                  <View style={styles.backRow}>
+                    {index > 0 ? (
                       <TouchableOpacity
-                        style={styles.nextButton}
+                        style={styles.backIconContainer}
                         onPress={() => {
-                          setIndex(index + 1);
+                          setIndex(index - 1);
                         }}>
-                        <Text style={styles.textWhite2}>Next</Text>
                         <Image
-                          source={images.nextIcon}
-                          style={styles.nextIcon}
+                          source={images.backIcon}
+                          style={styles.backIcon}
                         />
                       </TouchableOpacity>
                     ) : null}
+                    <Text style={styles.title}>More info</Text>
+                  </View>
+                  <View style={styles.textArea}>
+                    {loader ? (
+                      <View style={styles.loaderContainer}>
+                        <ActivityIndicator
+                          color={colors.disabledText}
+                          size={40}
+                        />
+                        <Text style={styles.disabledTextSmall}>
+                          Please be patient while your information is being
+                          processed!
+                        </Text>
+                      </View>
+                    ) : (
+                      <TextInput
+                        multiline={true}
+                        placeholder="Notes + better info for more accurate results"
+                        placeholderTextColor={colors.disabledText}
+                        style={styles.textAreaInput}
+                        value={notes}
+                        onChangeText={setNotes}
+                      />
+                    )}
                   </View>
                 </View>
-              ) : index === 2 ? (
-                <View style={styles.lowerBody}>
-                  <View>
-                    <View style={styles.backRow}>
-                      {index > 0 ? (
-                        <TouchableOpacity
-                          style={styles.backIconContainer}
-                          onPress={() => {
-                            setIndex(index - 1);
-                          }}>
-                          <Image
-                            source={images.backIcon}
-                            style={styles.backIcon}
-                          />
-                        </TouchableOpacity>
-                      ) : null}
-                      <Text style={styles.title}>More info</Text>
-                    </View>
-                    <View style={styles.textArea}>
-                      {loader ? (
-                        <View style={styles.loaderContainer}>
-                          <ActivityIndicator
-                            color={colors.disabledText}
-                            size={40}
-                          />
-                          <Text style={styles.disabledTextSmall}>
-                            Please be patient while your information is being
-                            processed!
-                          </Text>
-                        </View>
-                      ) : (
-                        <TextInput
-                          multiline={true}
-                          placeholder="Notes + better info for more accurate results"
-                          placeholderTextColor={colors.disabledText}
-                          style={styles.textAreaInput}
-                          value={notes}
-                          onChangeText={setNotes}
-                        />
-                      )}
-                    </View>
-                  </View>
-                  <View style={styles.bottomRow}>
-                    <View style={styles.bottomRow2}>
-                      {!loader ? (
-                        <OrangeButton
-                          title="Get DTC Report"
-                          onPress={() => {
-                            if (!loader) {
-                              handleProcessDtcs();
-                            }
-                            // handleScan(); // Is this supposed to be commented out? It seems to take the user to the scan report.
-                          }}
-                        />
-                      ) : null}
-                    </View>
+                <View style={styles.bottomRow}>
+                  <View style={styles.bottomRow2}>
+                    {!loader ? (
+                      <OrangeButton
+                        title="Get DTC Report"
+                        onPress={() => {
+                          if (!loader) {
+                            handleProcessDtcs();
+                          }
+                          // handleScan(); // Is this supposed to be commented out? It seems to take the user to the scan report.
+                        }}
+                      />
+                    ) : null}
                   </View>
                 </View>
-              ) : null}
-            </View>
+              </View>
+            ) : null}
           </View>
         </View>
       </TouchableWithoutFeedback>
